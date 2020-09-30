@@ -33,10 +33,14 @@ personal "Morning Post".
 ## Screenshots
 
 ![](./screenshots/news.png)
+This is the main page with the overview of the categories/tags. There is a lead article on top, followed by the latest article from the top 8 categories.
+Below that follows a list of a number of headlines for these 8 categories. At the bottom follows a full article for the remaining three categories, next to a list of some headlines in that category.
 
 ![](./screenshots/tag.png)
+The category page shows the two latest articles on top, followed by a list of headlines with teasers and a list of headlines from other categories.
 
 ![](./screenshots/article.png)
+The article page shows a single article in the middle, while the left hand shows a list of headlines for that category, and the right shows a list of headlines from the same source.
 
 ## Installation
 
