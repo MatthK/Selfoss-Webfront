@@ -1,4 +1,4 @@
-# selfoss - Webfront - V1.0
+# selfoss - Webfront - V0.9
 
 This is newspaper style webfront for the selfoss RSS reader (https://github.com/fossar/selfoss).
 
