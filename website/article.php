@@ -4,7 +4,9 @@ include("includes/constants.php");
 if (isset($_GET['i']))
 {
    $id  = $_GET['i'];
-}  
+} else {
+   $id = 0;
+}
 
 $rSet = array();
 
@@ -14,11 +16,16 @@ if ($mysqli->connect_errno) {
     printf("Connect failed: %s\n", $mysqli->connect_error);
     exit();
 }
-$query = "SELECT DISTINCT I.title, I.content, I.link, I.datetime as 'updatetime', I.author, S.title as 'source', S.tags, I.starred, S.id AS 'sid', I.unread FROM items I INNER JOIN sources S ON I.source = S.id WHERE I.id = " . $id;
-$result = mysqli_query($mysqli, $query);
-while($row = mysqli_fetch_assoc($result)){
+
+$stmt = $mysqli->prepare("SELECT DISTINCT I.title, I.content, I.link, I.datetime as 'updatetime', I.author, S.title as 'source', S.tags, I.starred, S.id AS 'sid', I.unread FROM items I INNER JOIN sources S ON I.source = S.id WHERE I.id = ?");
+$stmt->bind_param("i", $id);
+
+$stmt->execute();
+$result = $stmt->get_result();
+while($row = $result->fetch_assoc()){
    $rSet[] = $row;
 }
+$stmt->close();
 $result -> free();
 $mysqli -> close();
 if ($rSet[0]["starred"] == 0) {
@@ -46,7 +53,7 @@ function searchKey($id, $array) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="A personalized newspaper based on Selfoss feed">
-    <meta name="author" content="">
+    <meta name="author" content="Matthias Karl">
     <title><?php echo $npName ?></title>
 
     <!-- Bootstrap core CSS -->

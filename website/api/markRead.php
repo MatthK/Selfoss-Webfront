@@ -4,7 +4,9 @@ include("../includes/constants.php");
 if (isset($_GET['i']))
 {
    $id  = $_GET['i'];
-} 
+} else {
+   $id = 0;
+}
 if (isset($_GET['s']))
 {
    $star  = $_GET['s'];
@@ -19,22 +21,32 @@ if ($mysqli->connect_errno) {
     exit();
 }
 if ($star == "1") {
-  $starqry = "UPDATE items SET starred = 1 WHERE id = " . $id;
-  if(mysqli_query($mysqli, $starqry)){
+  $starqry = $mysqli->prepare("UPDATE items SET starred = 1 WHERE id = ?");
+  $starqry->bind_param("i", $id);
+  $starqry->execute();
+  $result = $starqry->affected_rows;
+  $starqry->close();
+  if($result > 0){
       $response_array['status'] = 'success';  
   }else {
       $response_array['status'] = 'error';  
   }
 } elseif ($star == "0") {
-  $starqry = "UPDATE items SET starred = 0 WHERE id = " . $id;
-  if(mysqli_query($mysqli, $starqry)){
+  $starqry = $mysqli->prepare("UPDATE items SET starred = 0 WHERE id = ?");
+  $starqry->bind_param("i", $id);
+  $starqry->execute();
+  $result = $starqry->affected_rows;
+  $starqry->close();
+  if($result > 0){
       $response_array['status'] = 'success';  
   }else {
       $response_array['status'] = 'error';  
   }
 } else {
-  $getTitle = "SELECT title FROM items WHERE id = " . $id;
-  $result = mysqli_query($mysqli, $getTitle);
+  $getTitle = $mysqli->prepare("SELECT title FROM items WHERE id = ?");
+  $getTitle->bind_param("i", $id);
+  $getTitle->execute();
+  $result = $getTitle->get_result();
   while($row = mysqli_fetch_assoc($result)){
      $title[] = $row;
   }

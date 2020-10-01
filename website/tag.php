@@ -16,8 +16,10 @@ if ($mysqli->connect_errno) {
     printf("Connect failed: %s\n", $mysqli->connect_error);
     exit();
 }
-$query = "SELECT DISTINCT S.id, S.title, C.content, S.updatetime, S.tags, C.link, O.title AS 'source', C.author FROM (SELECT HTML_UnEncode(I.title) as 'Title', MIN(I.datetime) AS 'UpdateTime', CASE WHEN LOCATE(',', GROUP_CONCAT(S.tags)) > 0 THEN LEFT(GROUP_CONCAT(S.tags), LOCATE(',', GROUP_CONCAT(S.tags))-1) ELSE GROUP_CONCAT(S.tags) END AS 'Tags', MIN(I.id) AS 'id' FROM items I INNER JOIN sources S ON I.source = S.id WHERE (I.unread = 1 OR I.starred = 1) GROUP BY HTML_UnEncode(I.title)) S INNER JOIN items C ON S.Title = HTML_UnEncode(C.title) AND S.UpdateTime = C.DateTime INNER JOIN sources O ON C.source = O.id WHERE S.Tags = '" . $tag . "' AND C.Content <> '[unable to retrieve full-text content]' ORDER BY UpdateTime DESC LIMIT 15";
-$result = mysqli_query($mysqli, $query);
+$query  = $mysqli->prepare("SELECT DISTINCT S.id, S.title, C.content, S.updatetime, S.tags, C.link, O.title AS 'source', C.author FROM (SELECT HTML_UnEncode(I.title) as 'Title', MIN(I.datetime) AS 'UpdateTime', CASE WHEN LOCATE(',', GROUP_CONCAT(S.tags)) > 0 THEN LEFT(GROUP_CONCAT(S.tags), LOCATE(',', GROUP_CONCAT(S.tags))-1) ELSE GROUP_CONCAT(S.tags) END AS 'Tags', MIN(I.id) AS 'id' FROM items I INNER JOIN sources S ON I.source = S.id WHERE (I.unread = 1 OR I.starred = 1) GROUP BY HTML_UnEncode(I.title)) S INNER JOIN items C ON S.Title = HTML_UnEncode(C.title) AND S.UpdateTime = C.DateTime INNER JOIN sources O ON C.source = O.id WHERE S.Tags = ? AND C.Content <> '[unable to retrieve full-text content]' ORDER BY UpdateTime DESC LIMIT 15");
+$query->bind_param("s", $tag);
+$query->execute();
+$result = $query->get_result();
 while($row = mysqli_fetch_assoc($result)){
    $rSet[] = $row;
 }
@@ -31,7 +33,7 @@ $mysqli -> close();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="A personalized newspaper based on Selfoss feed">
-    <meta name="author" content="">
+    <meta name="author" content="Matthias Karl">
     <title><?php echo $npName ?></title>
 
     <!-- Bootstrap core CSS -->
@@ -160,6 +162,8 @@ $mysqli -> close();
        
          getNews('other<?php echo $tag; ?>', 1024, 30, '', 'tag');
          setInterval(function() { getNews('other<?php echo $tag; ?>', 1024, 30, '', 'tag'); }, <?php echo $artrf; ?> * 1000);
+
+         setMenu('<?php echo $tag; ?>');
 
          $('body').on('click', '#errhide', function() {
             hideMsg('err');
