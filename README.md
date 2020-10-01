@@ -44,8 +44,15 @@ The article page shows a single article in the middle, while the left hand shows
 
 ## Installation
 
-0. You need to have selfoss (https://github.com/fossar/selfoss) installed first. Please revert to that installation instructions to get selfoss going first. Use a MySQL database as the backend to make sure it works out of the box. I have not tried it with Sqlite or PostgreSQL databases. It might work, but I haven't tested it.
-1. To keep things clean(er), I suggest to create a separate virtual website on the same (or a different) machine. I have used an nginx webserver and this tutorial on Step 5 shows the basics (https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04). You might want to set news.php as the index page so it defaults to that page. 
+You need to have selfoss (https://github.com/fossar/selfoss) installed first. Please revert to that installation instructions to get selfoss going first. Use a MySQL database as the backend to make sure it works out of the box. I have not tried it with Sqlite or PostgreSQL databases. It might work, but I haven't tested it.
+Also when you setup your feeds in selfoss, make sure to use the "RSS Feed (with FullTextRss)" in Type. This should pull the full article to your database instead of just the teasers from the RSS feed itself.
+![](./screenshots/fulltextrss.png)
+In the Tags field, you can enter multiple values, but my website will only consider the first value.
+When I installed selfoss, I first struggled with the setup of the database. My selfoss user didn't have full admin rights and struggled to install the necessary triggers. When I used the root user for the initial install, it worked. I then changed the settings back to a more restricted selfoss user and it seems to work just fine. So once you installed the files and stuff, go to http://selfoss/cliupdate.php and run that twice. The first time it showed an error, but the second time it seem to work. When you then go to the index.php it should be up and running and you can add your feeds.
+
+Once selfoss is up and has some content downloaded, you can install this webfront.
+
+1. To keep things clean(er), I suggest to create a separate virtual website/host on the same (or a different) machine. I have used an nginx webserver and this tutorial on Step 5 shows the basics (https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04). You might want to set news.php as the index page so it defaults to that page. 
 2. Copy the files from the website folder in this repository to your virtual site. Keep the same folder structure.
 3. Adjust the settings/variables in the /includes/constants.php file. There are comments in the file. You have to define your database details and also add the 11 categories/tags in the array below. The first column is for the visible category names. These can include spaces, while the second column should avoid spaces or special characters.
 4. Enjoy
