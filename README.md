@@ -44,7 +44,7 @@ The article page shows a single article in the middle, while the left hand shows
 
 ## Installation
 
-0. You need to have selfoss (https://github.com/fossar/selfoss) installed first. Please revert to that installation instructions to get selfoss going first.
+0. You need to have selfoss (https://github.com/fossar/selfoss) installed first. Please revert to that installation instructions to get selfoss going first. Use a MySQL database as the backend to make sure it works out of the box. I have not tried it with Sqlite or PostgreSQL databases. It might work, but I haven't tested it.
 1. To keep things clean(er), I suggest to create a separate virtual website on the same (or a different) machine. I have used an nginx webserver and this tutorial on Step 5 shows the basics (https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04). You might want to set news.php as the index page so it defaults to that page. 
 2. Copy the files from the website folder in this repository to your virtual site. Keep the same folder structure.
 3. Adjust the settings/variables in the /includes/constants.php file. There are comments in the file. You have to define your database details and also add the 11 categories/tags in the array below. The first column is for the visible category names. These can include spaces, while the second column should avoid spaces or special characters.
