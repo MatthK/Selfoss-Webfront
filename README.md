@@ -52,7 +52,7 @@ When I installed selfoss, I first struggled with the setup of the database. My s
 
 Once selfoss is up and has some content downloaded, you can install this webfront.
 
-1. To keep things clean(er), I suggest to create a separate virtual website/host on the same (or a different) machine. I have used an nginx webserver and this tutorial on Step 5 shows the basics (https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04). You might want to set news.php as the index page so it defaults to that page. 
+1. To keep things clean(er), I suggest to create a separate virtual website/host on the same (or a different) machine. I have used an nginx webserver and this tutorial on Step 5 shows the basics (https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04). Set index.php as the index page so it defaults to that page. 
 2. Clone the repository into the folder where you want to host the site 
    Create the directory `sudo mkdir /var/www/selfoss-webfront/`
    Go into that directory `cd /var/www/selfoss-webfront/'
