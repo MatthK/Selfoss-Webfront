@@ -4,7 +4,7 @@
             <small><span class="d-none d-sm-block">Last refreshed on </span><span id="lastrf"><?php echo date("d.m.Y H:i:s") ?></span></small>
           </div>
           <div class="col-8 text-center">
-            <a class="<?php echo $font; ?> text-dark" href="news.php"><?php echo $npName ?></a>
+            <a class="<?php echo $font; ?> text-dark" href="index.php"><?php echo $npName ?></a>
           </div>
           <div class="col-2 d-flex justify-content-end align-items-center">
             <a class="text-muted" href="#" aria-label="Search">
