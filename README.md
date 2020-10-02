@@ -53,8 +53,11 @@ When I installed selfoss, I first struggled with the setup of the database. My s
 Once selfoss is up and has some content downloaded, you can install this webfront.
 
 1. To keep things clean(er), I suggest to create a separate virtual website/host on the same (or a different) machine. I have used an nginx webserver and this tutorial on Step 5 shows the basics (https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04). You might want to set news.php as the index page so it defaults to that page. 
-2. Copy the files from the website folder in this repository to your virtual site. Keep the same folder structure.
-3. Adjust the settings/variables in the /includes/constants.php file. There are comments in the file. You have to define your database details and also add the 11 categories/tags in the array below. The first column is for the visible category names. These can include spaces, while the second column should avoid spaces or special characters.
+2. Clone the repository into the folder where you want to host the site 
+   Create the directory `sudo mkdir /var/www/selfoss-webfront/`
+   Go into that directory `cd /var/www/selfoss-webfront/'
+   Clone this repository `sudo git clone https://github.com/MatthK/Selfoss-Webfront`
+3. Adjust the settings/variables in the `/includes/constants.php` file. There are comments in the file. You have to define your database details and also add the 11 categories/tags in the array below. The first column is for the visible category names. These can include spaces, while the second column should avoid spaces or special characters.
 4. Enjoy
 5. Optional: Add a reverse proxy in front (or open the port) to the virtual website to have access to the newspaper from outside your network. I am using a reverse proxy with personal certificate to secure the site.
 
