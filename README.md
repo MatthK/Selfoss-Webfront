@@ -58,8 +58,9 @@ Once selfoss is up and has some content downloaded, you can install this webfron
    Go into that directory `cd /var/www/selfoss-webfront/'
    Clone this repository `sudo git clone https://github.com/MatthK/Selfoss-Webfront`
 3. Adjust the settings/variables in the `/includes/constants.php` file. There are comments in the file. You have to define your database details and also add the 11 categories/tags in the array below. The first column is for the visible category names. These can include spaces, while the second column should avoid spaces or special characters.
-4. Enjoy
-5. Optional: Add a reverse proxy in front (or open the port) to the virtual website to have access to the newspaper from outside your network. I am using a reverse proxy with personal certificate to secure the site.
+4. You also have to create a function in the database. Simply run the HTML_UnEncode.sql in the MySQL database once to create the function
+5. Enjoy
+6. Optional: Add a reverse proxy in front (or open the port) to the virtual website to have access to the newspaper from outside your network. I am using a reverse proxy with personal certificate to secure the site.
 
 ## Configuration
 
