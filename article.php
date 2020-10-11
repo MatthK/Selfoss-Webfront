@@ -9,7 +9,6 @@ if (isset($_GET['i']))
 }
 
 $rSet = array();
-//$rows = array();
 
 $mysqli = new mysqli($dbserver, $username, $dbpwd, $database);
 /* check connection */
@@ -78,7 +77,7 @@ function searchKey($id, $array) {
         <div class="col-md-3 d-none d-sm-block">
           <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
+            <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo strtolower($rSet[0]["tags"]); ?>" class="text-body"><?php echo $tag; ?></a></strong>
               <div id="<?php echo strtolower($rSet[0]["tags"]) ?>news0"></div>
               <div id="newsgmc" style="display: none;">Show more</div>
@@ -102,7 +101,7 @@ function searchKey($id, $array) {
         <div class="col-md-3 d-block d-sm-none">
           <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
+            <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><?php echo $rSet[0]["tags"] ?></strong>
               <div id="<?php echo strtolower($rSet[0]["tags"]) ?>newsm0"></div>
               <div id="newsmgmc" style="display: none;">Show more</div>
@@ -113,7 +112,7 @@ function searchKey($id, $array) {
         <div class="col-md-3">
           <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
+            <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><?php echo $rSet[0]["source"] ?></strong>
               <div id="newssrc0"></div>
               <div id="newssrcgmc" style="display: none;">Show more</div>

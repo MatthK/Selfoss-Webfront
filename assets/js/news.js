@@ -42,8 +42,13 @@
        }
 
        function getInfTag(cNo, tag, vcnt) {
+          if (tag.substr(0,3) == 'srx') {
+             vUrl = 'api/getNews.php?c=x&' + 't='+encodeURI(tag.substr(3))+'&r='+cNo;
+          } else {
+             vUrl = 'api/getNews.php?c=t&' + 't='+tag+'&r='+cNo;
+          }
           $.ajax({
-              url: 'api/getNews.php?c=t&' + 't='+tag+'&r='+cNo,
+              url: vUrl,
               type: 'GET',
               dataType: 'text',
               success: function ( data ) {
@@ -94,7 +99,7 @@
           var vgC = oReply.length;
           var vHtml = '';
           for (g = 1; g < vgC; g++) {
-              vHtml += '<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative"><div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-250 position-relative"><div class="col p-3 d-flex flex-column position-static">';
+              vHtml += '<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative"><div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-250 position-relative"><div class="col p-2 d-flex flex-column position-static">';
               vHtml += '<div><small><a href="' + oReply[g].link + '" target="_blank"><span>' + oReply[g].Source + '</span></a> - <span class="mb-1 text-muted">' + oReply[g].updatetime + ' - ' + oReply[g].author + '</span></small></div>';
               vHtml += '<h2 class="mb-0"><a href="article.php?i=' + oReply[g].id + '" class="text-dark">' + oReply[g].title + '</a></h2><p>&nbsp;</p>';
               vHtml += '<p class="card-text mb-auto">' + oReply[g].content + '</p></div></div></div>';
@@ -147,7 +152,7 @@
        }
        
        function checkDBot(id) {
-         if (($(window).height() + $(window).scrollTop()) >= (document.getElementById(id).style.height + document.getElementById(id).style.top)) {
+         if (($(window).height() + $(window).scrollTop()) >= (document.getElementById(id).offsetHeight + document.getElementById(id).offsetTop)) {
             return true;
          } else {
             return false;

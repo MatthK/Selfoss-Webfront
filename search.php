@@ -1,13 +1,12 @@
 <?php
 include("includes/constants.php");
 
-if (isset($_GET['t']))
+if (isset($_POST['s']))
 {
-   $tag  = $_GET['t'];
+   $srx  = $_POST['s'];
 } else {
-   $tag = 'world';
+   $srx = '';
 }
-
 $rSet = array();
 
 $mysqli = new mysqli($dbserver, $username, $dbpwd, $database);
@@ -16,13 +15,27 @@ if ($mysqli->connect_errno) {
     printf("Connect failed: %s\n", $mysqli->connect_error);
     exit();
 }
-$query  = $mysqli->prepare("SELECT DISTINCT S.id, S.title, C.content, S.updatetime, S.tags, C.link, O.title AS 'source', C.author FROM (SELECT HTML_UnEncode(I.title) as 'Title', MIN(I.datetime) AS 'UpdateTime', CASE WHEN LOCATE(',', GROUP_CONCAT(S.tags)) > 0 THEN LEFT(GROUP_CONCAT(S.tags), LOCATE(',', GROUP_CONCAT(S.tags))-1) ELSE GROUP_CONCAT(S.tags) END AS 'Tags', MIN(I.id) AS 'id' FROM items I INNER JOIN sources S ON I.source = S.id WHERE (I.unread = 1 OR I.starred = 1) GROUP BY HTML_UnEncode(I.title)) S INNER JOIN items C ON S.Title = HTML_UnEncode(C.title) AND S.UpdateTime = C.DateTime INNER JOIN sources O ON C.source = O.id WHERE S.Tags = ? AND C.Content <> '[unable to retrieve full-text content]' ORDER BY UpdateTime DESC LIMIT 15");
-$query->bind_param("s", $tag);
+if (substr($srx, 0, 1) == '"') {
+   $src = str_replace('"', '', $srx);
+   $src = "%" . $src . "%";
+} else {
+   $src = str_replace(" ", "%", $srx);
+   $src = "%" . $src . "%";
+}
+$query = $mysqli->prepare("SELECT DISTINCT S.id, S.Title, C.Content, S.UpdateTime, S.Tags, C.link, O.title AS 'Source', C.author FROM (SELECT HTML_UnEncode(I.title) as 'Title', MIN(I.datetime) AS 'UpdateTime', CASE WHEN LOCATE(',', GROUP_CONCAT(S.tags)) > 0 THEN LEFT(GROUP_CONCAT(S.tags), LOCATE(',', GROUP_CONCAT(S.tags))-1) ELSE GROUP_CONCAT(S.tags) END AS 'Tags', MIN(I.id) AS 'id' FROM items I INNER JOIN sources S ON I.source = S.id WHERE I.title LIKE ? OR I.content LIKE ? GROUP BY HTML_UnEncode(I.title)) S INNER JOIN items C ON S.Title = HTML_UnEncode(C.title) AND S.UpdateTime = C.DateTime INNER JOIN sources O ON C.source = O.id ORDER BY UpdateTime DESC LIMIT 15");
+$query->bind_param("ss", $src, $src);
 $query->execute();
 $result = $query->get_result();
 while($row = mysqli_fetch_assoc($result)){
    $rSet[] = $row;
 }
+$result -> free();
+$query = $mysqli->prepare("SELECT COUNT(DISTINCT S.id) AS NoRec FROM (SELECT HTML_UnEncode(I.title) as 'Title', MIN(I.datetime) AS 'UpdateTime', CASE WHEN LOCATE(',', GROUP_CONCAT(S.tags)) > 0 THEN LEFT(GROUP_CONCAT(S.tags), LOCATE(',', GROUP_CONCAT(S.tags))-1) ELSE GROUP_CONCAT(S.tags) END AS 'Tags', MIN(I.id) AS 'id' FROM items I INNER JOIN sources S ON I.source = S.id WHERE I.title LIKE ? OR I.content LIKE ? GROUP BY HTML_UnEncode(I.title)) S INNER JOIN items C ON S.Title = HTML_UnEncode(C.title) AND S.UpdateTime = C.DateTime INNER JOIN sources O ON C.source = O.id");
+$query->bind_param("ss", $src, $src);
+$query->execute();
+$result = $query->get_result();
+$row = mysqli_fetch_assoc($result);
+$NoRec = $row;
 $result -> free();
 $mysqli -> close();
 
@@ -53,51 +66,34 @@ $mysqli -> close();
   <body>
     <div class="container">
 <?php include("includes/news_header.php"); ?>
-      <!-- top row start -->
-      <div class="row mb-4">
-        <!-- Header left start -->
-        <div class="col-md-6">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-500 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <div><small><a href="<?php echo $rSet[0]["link"]; ?>l" target="_blank"><span><?php echo $rSet[0]["source"]; ?></span></a> - <span class="mb-1 text-muted"><?php echo $rSet[0]["updatetime"]; ?> - <?php echo $rSet[0]["author"] ?></span></small></div>
-              <h2 class="mb-0"><a href="article.php?i=<?php echo $rSet[0]["id"]; ?>" class="text-dark"><?php echo $rSet[0]["title"]; ?></a></h2>
-              <p>&nbsp;</p>
-              <p class="card-text mb-auto"><?php echo $rSet[0]["content"]; ?></p>
-            </div>
-           </div>
-          </div>
-        </div>
-        <!-- Header left end -->
-        <!-- Header right start -->
-        <div class="col-md-6">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-500 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <div><small><a href="<?php echo $rSet[1]["link"]; ?>l" target="_blank"><span><?php echo $rSet[1]["source"]; ?></span></a> - <span class="mb-1 text-muted"><?php echo $rSet[1]["updatetime"]; ?> - <?php echo $rSet[1]["author"] ?></span></small></div>
-              <h2 class="mb-0"><a href="article.php?i=<?php echo $rSet[1]["id"]; ?>" class="text-dark"><?php echo $rSet[1]["title"]; ?></a></h2>
-              <p>&nbsp;</p>
-              <p class="card-text mb-auto"><?php echo $rSet[1]["content"]; ?></p>
-            </div>
-           </div>
-          </div>
-        </div>
-        <!-- Header right end -->
-      </div>
-      <!-- top row end -->
       <!-- content rows start -->
       <div class="row mb-4">
         <!-- Content cards start -->
         <div class="col-md-9">
          <div id="tcontent">
-<?php for ($i = 2; $i < count($rSet); $i++) { ?>        
+<?php if (count($rSet) == 0) { ?>
+          <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+            <div class="col p-2 d-flex flex-column position-static">
+              <h2 class="mb-0">Search term <?php echo $src ?> found no records</h2>
+            </div>
+           </div>
+          </div>
+<?php } else { ?>          
+          <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+            <div class="col p-1 d-flex flex-column position-static">
+              <p>A total of <?php echo $NoRec["NoRec"]; ?> records match your search criteria</p>
+            </div>
+          </div>
+<?php } ?>          
+<?php for ($i = 0; $i < count($rSet); $i++) { ?>
           <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <div><small><a href="<?php echo $rSet[$i]["link"]; ?>" target="_blank"><span><?php echo $rSet[$i]["source"]; ?></span></a> - <span class="mb-1 text-muted"><?php echo $rSet[$i]["updatetime"]; ?> - <?php echo $rSet[$i]["author"] ?></span></small></div>
-              <h2 class="mb-0"><a href="article.php?i=<?php echo $rSet[$i]["id"]; ?>" class="text-dark"><?php echo $rSet[$i]["title"]; ?></a></h2>
+            <div class="col p-2 d-flex flex-column position-static">
+              <div><small><a href="<?php echo $rSet[$i]["link"]; ?>" target="_blank"><span><?php echo $rSet[$i]["Source"]; ?></span></a> - <span class="mb-1 text-muted"><?php echo $rSet[$i]["UpdateTime"]; ?> - <?php echo $rSet[$i]["author"] ?></span></small></div>
+              <h2 class="mb-0"><a href="article.php?i=<?php echo $rSet[$i]["id"]; ?>" class="text-dark"><?php echo $rSet[$i]["Title"]; ?></a></h2>
               <p>&nbsp;</p>
-              <p class="card-text mb-auto"><?php echo $rSet[$i]["content"]; ?></p>
+              <p class="card-text mb-auto"><?php echo $rSet[$i]["Content"]; ?></p>
             </div>
            </div>
           </div>
@@ -114,7 +110,7 @@ $mysqli -> close();
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body" id="onstr">Other news</strong>
-              <div id="other<?php echo $tag; ?>news0"></div>
+              <div id="news0"></div>
               <div id="newsgmc" style="display: none;">Show more</div>
             </div>
            </div>
@@ -138,25 +134,22 @@ $mysqli -> close();
        var cNo   = 0;
        var cnt = 2;       
        var mar = 1;
-       var tagName = jTags[jTags.findIndex(x => x.tag === '<?php echo strtolower($tag); ?>')].name;
        var cntNews = 0;
        
        $(document).ready(function(){
        
-         getNews('other<?php echo $tag; ?>', 1024, <?php echo $artno; ?>, 'c='+cntNews+'&', 'tag', cntNews);
-         setInterval(function() { getNews('other<?php echo $tag; ?>', 1024, <?php echo $artno; ?>, 'c='+cntNews+'&', 'tag', cntNews); }, <?php echo $artrf; ?> * 1000);
-
-         setMenu('<?php echo $tag; ?>');
+         getNews('', 1024, <?php echo $artno; ?>, 'c='+cntNews+'&', 'srx', cntNews);
+         setInterval(function() { getNews('', 1024, <?php echo $artno; ?>, 'c='+cntNews+'&', 'srx', cntNews); }, <?php echo $artrf; ?> * 1000);
 
          $(window).on("scroll", function() {
            if (checkDBot('infscroll') && mar == 1) {
               // get more content
               mar = 0;
               cNo = cNo + 14;
-              getInfTag(cNo, '<?php echo $tag ?>', cnt);
+              getInfTag(cNo, 'srx<?php echo $srx ?>', cnt);
               cnt = cnt + 1;
            }
-           if (checkDBot('other<?php echo $tag; ?>news'+cntNews)) {
+           if (checkDBot('news'+cntNews)) {
               $('#newsgmc').show('slow');
            }
          });         
@@ -164,7 +157,7 @@ $mysqli -> close();
          $('body').on('click', '#newsgmc', function() {
             $('#newsgmc').hide('slow');
             cntNews += 1;
-            getNews('other<?php echo $tag; ?>', 1024, <?php echo $artno; ?>, 'c='+cntNews+'&', 'tag', cntNews);
+            getNews('', 1024, <?php echo $artno; ?>, 'c='+cntNews+'&', 'srx', cntNews);
          });
          $('body').on('click', '#errhide', function() {
             hideMsg('err');

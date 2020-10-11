@@ -24,6 +24,7 @@ personal "Morning Post".
 - The category page scrolls infinitely, at least until there are no more articles
 - List boxes with headlines (except on the start page) feature a "Show more" link to append more headlines
 - Info or error messages now show in toasts at the lower left of the screen
+- You can search for keywords in titles or the content of the article (type words/search string or enclose them "with double quotes" to find the whole string)
 
 ## Limitations
 
