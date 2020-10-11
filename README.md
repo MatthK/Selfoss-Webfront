@@ -23,6 +23,7 @@ personal "Morning Post".
 - Links to the source are opened in a new tab
 - The category page scrolls infinitely, at least until there are no more articles
 - List boxes with headlines (except on the start page) feature a "Show more" link to append more headlines
+- Info or error messages now show in toasts at the lower left of the screen
 
 ## Limitations
 
