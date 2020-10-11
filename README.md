@@ -1,4 +1,4 @@
-# selfoss - Webfront - V0.9
+# selfoss - Webfront
 
 This is newspaper style webfront for the selfoss RSS reader (https://github.com/fossar/selfoss).
 
@@ -21,6 +21,8 @@ personal "Morning Post".
 - Articles can be marked read (made disappear) with a click on the x in the list boxes
 - Articles with the same title are combined and only shown once (based on lowest date). So if a source shows the same item in different feeds it will only be shown once on the page
 - Links to the source are opened in a new tab
+- The category page scrolls infinitely, at least until there are no more articles
+- List boxes with headlines (except on the start page) feature a "Show more" link to append more headlines
 
 ## Limitations
 

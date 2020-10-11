@@ -9,6 +9,7 @@ if (isset($_GET['i']))
 }
 
 $rSet = array();
+//$rows = array();
 
 $mysqli = new mysqli($dbserver, $username, $dbpwd, $database);
 /* check connection */
@@ -73,24 +74,14 @@ function searchKey($id, $array) {
   <body>
     <div class="container">
 <?php include("includes/news_header.php"); ?>
-      <!-- error row start -->
-      <div class="row mb-4">
-        <div class="col-md-12">
-           <div id="errbox" class="mb-3 alert alert-danger" role="alert" style="display: none;">
-             <div id="errmsg" class="w-100"></div>
-             <div class="flex-shrink-1"><button type="button" class="justify-content-end btn btn-light btn-sm" id="errhide">close</button></div>
-           </div>
-        </div>
-      </div>
-      <!-- error row end -->
       <div class="row mb-4">
         <div class="col-md-3 d-none d-sm-block">
           <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo strtolower($rSet[0]["tags"]); ?>" class="text-body"><?php echo $tag; ?></a></strong>
-              <div id="<?php echo strtolower($rSet[0]["tags"]) ?>news"></div>
-              <div id="errmsg3"></div>
+              <div id="<?php echo strtolower($rSet[0]["tags"]) ?>news0"></div>
+              <div id="newsgmc" style="display: none;">Show more</div>
             </div>
            </div>
           </div>
@@ -101,16 +92,9 @@ function searchKey($id, $array) {
             <div class="col p-3 d-flex flex-column position-static" id="article" aid="<?php echo $id; ?>">
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo strtolower($rSet[0]["tags"]); ?>" class="text-body"><?php echo $tag; ?></a></strong>
               <div class="d-flex mb-1 text-muted"><div class="w-100"><small><?php echo $rSet[0]["source"] ?> - <?php echo $rSet[0]["updatetime"] ?> - <?php echo $rSet[0]["author"] ?></small></div><div class="flex-shrink-1"><button type="button" class="justify-content-end btn <?php echo $class; ?> btn-sm" id="artstar" aid="<?php echo $id; ?>">*</button></div></div>
-              <h2 class="mb-0"><?php echo $rSet[0]["title"] ?></h2>
+              <h2 class="mb-0"><a href="<?php echo $rSet[0]["link"]; ?>" class="text-dark" target="_blank"><?php echo $rSet[0]["title"] ?></a></h2>
               <p>&nbsp;</p>
               <p class="card-text mb-auto"><?php echo $rSet[0]["content"]; ?></p>
-              <p><a href="<?php echo $rSet[0]["link"]; ?>" target="_blank">Link to the full article</a></p>
-              <!-- info row start -->
-              <div id="infobox" class="mb-3 alert alert-primary invisible" role="alert">
-                <div id="infomsg" class="w-100"></div>
-                <div class="flex-shrink-1"><button type="button" class="justify-content-end btn btn-light btn-sm" id="infohide">close</button></div>
-              </div>
-              <!-- info row end -->
             </div>
            </div>
           </div>
@@ -120,7 +104,8 @@ function searchKey($id, $array) {
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><?php echo $rSet[0]["tags"] ?></strong>
-              <div id="<?php echo strtolower($rSet[0]["tags"]) ?>news2"></div>
+              <div id="<?php echo strtolower($rSet[0]["tags"]) ?>newsm0"></div>
+              <div id="newsmgmc" style="display: none;">Show more</div>
             </div>
            </div>
           </div>
@@ -130,59 +115,79 @@ function searchKey($id, $array) {
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><?php echo $rSet[0]["source"] ?></strong>
-              <div id="newssrc"></div>
+              <div id="newssrc0"></div>
+              <div id="newssrcgmc" style="display: none;">Show more</div>
             </div>
            </div>
           </div>
         </div>
       </div>
     </div>
-    
-    <div class="toast bg-primary text-white p-3" role="alert" aria-live="assertive" aria-atomic="true" data-delay="8000" style="position: fixed; bottom: 5px; right: 5px;">
-      <div class="toast-body lead" id="toast-body"></div>
+    <!-- Toast start -->    
+    <div id="toast-wrapper" class="toast text-white" role="alert" aria-live="assertive" aria-atomic="true" data-delay="8000" style="position: fixed; bottom: 5px; right: 5px;">
+      <div class="toast-body lead p-2" id="toast-body"></div>
     </div>    
-    
+    <!-- Toast end -->    
     <script language="JavaScript" type="text/javascript" src="assets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="assets/js/news.js"></script>
     <script type="text/javascript">
        var jstar = <?php echo $jstar ?>;
        var imto  = <?php echo $imto ?>;
+       var cntNews = 0;
+       var cntSrc = 0;
        
        $(document).ready(function(){
        
          var mar = <?php echo $rSet[0]["unread"] ?>;
        
-         getNews('<?php echo strtolower($rSet[0]["tags"]); ?>', 1024, <?php echo $artno; ?>, '', 'article');
-         getNews('<?php echo strtolower($rSet[0]["sid"]); ?>', 1024, <?php echo $artno; ?>, 'c=s&', 'article');
-         setInterval(function() { getNews('<?php echo strtolower($rSet[0]["tags"]); ?>', 1024, <?php echo $artno; ?>, '', 'article'); }, <?php echo $artrf; ?> * 1000);
-         setInterval(function() { getNews('<?php echo strtolower($rSet[0]["sid"]); ?>', 1024, <?php echo $artno; ?>, 'c=s&', 'article'); }, <?php echo $artrf; ?> * 1000);
-
-         var scrollPosition = $(window).height() + $(window).scrollTop();
-         var divBottom = $('#article').outerHeight() + $('#article').position().top;
+         getNews('<?php echo strtolower($rSet[0]["tags"]); ?>', 1024, <?php echo $artno; ?>, 'c='+cntNews+'&', 'article', cntNews);
+         getNews('<?php echo strtolower($rSet[0]["sid"]); ?>', 1024, <?php echo $artno; ?>, 'c=s'+cntSrc+'&', 'article', cntSrc);
+         setInterval(function() { getNews('<?php echo strtolower($rSet[0]["tags"]); ?>', 1024, <?php echo $artno; ?>, 'c='+cntNews+'&', 'article', cntNews); }, <?php echo $artrf; ?> * 1000);
+         setInterval(function() { getNews('<?php echo strtolower($rSet[0]["sid"]); ?>', 1024, <?php echo $artno; ?>, 'c=s'+cntSrc+'&', 'article', cntSrc); }, <?php echo $artrf; ?> * 1000);
 
          setMenu('<?php echo strtolower($rSet[0]["tags"]); ?>');
 
-         if (scrollPosition >= divBottom && mar == 1) {
+         if (checkDBot('article') && mar == 1) {
             setTimeout(function() { 
                 let hid = $('#article').attr('aid');
                 hideArticle(hid);
                 mar = 0;
-                showMsg('info','Article has been marked as read',<?php echo $imto; ?>)
+                showToast('alert-primary','Article has been marked as read',<?php echo $imto; ?>);
+
             }, <?php echo $smar; ?> * 1000);
          }
          
          $(window).on("scroll", function() {
-           var scrollPosition = $(window).height() + $(window).scrollTop();
-           var divBottom = $('#article').outerHeight() + $('#article').position().top;
-           if (scrollPosition >= divBottom && mar == 1) {
+           if (checkDBot('article') && mar == 1) {
               // mark article as read when scrolled to bottom
               let hid = $('#article').attr('aid');
               hideArticle(hid);
               mar = 0; // don't trigger this again
-              showMsg('info','Article has been marked as read',15)
+              showToast('alert-primary','Article has been marked as read',<?php echo $imto; ?>);
            }
+           if (checkDBot('<?php echo strtolower($rSet[0]["tags"]) ?>news'+cntNews)) {
+              $('#newsgmc').show('slow');
+           }
+           if (checkDBot('<?php echo strtolower($rSet[0]["tags"]) ?>newsm'+cntNews)) {
+              $('#newsmgmc').show('slow');
+           }
+           if (checkDBot('newssrc'+cntSrc)) {
+              $('#newssrcgmc').show('slow');
+           }
+
          });         
          
+         $('body').on('click', '#newsgmc', function() {
+            $('#newsgmc').hide('slow');
+            cntNews += 1;
+            getNews('<?php echo strtolower($rSet[0]["tags"]); ?>', 1024, <?php echo $artno; ?>, 'c='+cntNews+'&', 'article', cntNews);
+         });
+         $('body').on('click', '#newssrcgmc', function() {
+            $('#newssrcgmc').hide('slow');
+            cntSrc += 1;
+            getNews('<?php echo strtolower($rSet[0]["sid"]); ?>', 1024, <?php echo $artno; ?>, 'c=s'+cntSrc+'&', 'article', cntSrc);
+         });
+
          $('body').on('click', '#errhide', function() {
             hideMsg('err');
          });

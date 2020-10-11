@@ -53,16 +53,6 @@ $mysqli -> close();
   <body>
     <div class="container">
 <?php include("includes/news_header.php"); ?>
-      <!-- error row start -->
-      <div class="row mb-4">
-        <div class="col-md-12">
-           <div id="errbox" class="mb-3 alert alert-danger" role="alert" style="display: none;">
-             <div id="errmsg" class="w-100"></div>
-             <div class="flex-shrink-1"><button type="button" class="justify-content-end btn btn-light btn-sm" id="errhide">close</button></div>
-           </div>
-        </div>
-      </div>
-      <!-- error row end -->
       <!-- top row start -->
       <div class="row mb-4">
         <!-- Header left start -->
@@ -74,11 +64,6 @@ $mysqli -> close();
               <h2 class="mb-0"><a href="article.php?i=<?php echo $rSet[0]["id"]; ?>" class="text-dark"><?php echo $rSet[0]["title"]; ?></a></h2>
               <p>&nbsp;</p>
               <p class="card-text mb-auto"><?php echo $rSet[0]["content"]; ?></p>
-            </div>
-           </div>
-           <div class="row no-gutters flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <p><a href="article.php?i=<?php echo $rSet[0]["id"]; ?>">Continue reading</a></p>
             </div>
            </div>
           </div>
@@ -95,11 +80,6 @@ $mysqli -> close();
               <p class="card-text mb-auto"><?php echo $rSet[1]["content"]; ?></p>
             </div>
            </div>
-           <div class="row no-gutters flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <p><a href="article.php?i=<?php echo $rSet[1]["id"]; ?>">Continue reading</a></p>
-            </div>
-           </div>
           </div>
         </div>
         <!-- Header right end -->
@@ -109,24 +89,23 @@ $mysqli -> close();
       <div class="row mb-4">
         <!-- Content cards start -->
         <div class="col-md-9">
-
+         <div id="tcontent">
 <?php for ($i = 2; $i < count($rSet); $i++) { ?>        
           <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
-              <div><small><a href="<?php echo $rSet[$i]["link"]; ?>l" target="_blank"><span><?php echo $rSet[$i]["source"]; ?></span></a> - <span class="mb-1 text-muted"><?php echo $rSet[$i]["updatetime"]; ?> - <?php echo $rSet[$i]["author"] ?></span></small></div>
+              <div><small><a href="<?php echo $rSet[$i]["link"]; ?>" target="_blank"><span><?php echo $rSet[$i]["source"]; ?></span></a> - <span class="mb-1 text-muted"><?php echo $rSet[$i]["updatetime"]; ?> - <?php echo $rSet[$i]["author"] ?></span></small></div>
               <h2 class="mb-0"><a href="article.php?i=<?php echo $rSet[$i]["id"]; ?>" class="text-dark"><?php echo $rSet[$i]["title"]; ?></a></h2>
               <p>&nbsp;</p>
               <p class="card-text mb-auto"><?php echo $rSet[$i]["content"]; ?></p>
             </div>
            </div>
-           <div class="row no-gutters flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <p><a href="article.php?i=<?php echo $rSet[$i]["id"]; ?>">Continue reading</a></p>
-            </div>
-           </div>
           </div>
 <?php } ?>          
+         </div>
+         <div id="tcontent2">
+         </div>
+         <div id="infscroll"></div>
         </div>
         <!-- Content cards end -->
         <!-- Other news start -->
@@ -135,7 +114,8 @@ $mysqli -> close();
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body" id="onstr">Other news</strong>
-              <div id="other<?php echo $tag; ?>news"></div>
+              <div id="other<?php echo $tag; ?>news0"></div>
+              <div id="newsgmc" style="display: none;">Show more</div>
             </div>
            </div>
           </div>
@@ -145,26 +125,47 @@ $mysqli -> close();
       <!-- content rows end -->
 
     </div>
-    <!-- toast start -->
-    <div class="toast bg-primary text-white p-3" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" style="position: fixed; bottom: 5px; right: 5px;">
-      <div class="toast-body lead" id="toast-body"></div>
+    <!-- Toast start -->    
+    <div id="toast-wrapper" class="toast text-white" role="alert" aria-live="assertive" aria-atomic="true" data-delay="8000" style="position: fixed; bottom: 5px; right: 5px;">
+      <div class="toast-body lead p-2" id="toast-body"></div>
     </div>    
-    <!-- toast end -->
-        
+    <!-- Toast end -->    
     <script language="JavaScript" type="text/javascript" src="assets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="assets/js/news.js"></script>
     <script type="text/javascript">
        var imto  = <?php echo $imto ?>;
        var jTags = <?php echo $jTags; ?>
+       var cNo   = 0;
+       var cnt = 2;       
+       var mar = 1;
        var tagName = jTags[jTags.findIndex(x => x.tag === '<?php echo strtolower($tag); ?>')].name;
+       var cntNews = 0;
        
        $(document).ready(function(){
        
-         getNews('other<?php echo $tag; ?>', 1024, 30, '', 'tag');
-         setInterval(function() { getNews('other<?php echo $tag; ?>', 1024, 30, '', 'tag'); }, <?php echo $artrf; ?> * 1000);
+         getNews('other<?php echo $tag; ?>', 1024, <?php echo $artno; ?>, 'c='+cntNews+'&', 'tag', cntNews);
+         setInterval(function() { getNews('other<?php echo $tag; ?>', 1024, <?php echo $artno; ?>, 'c='+cntNews+'&', 'tag', cntNews); }, <?php echo $artrf; ?> * 1000);
 
          setMenu('<?php echo $tag; ?>');
 
+         $(window).on("scroll", function() {
+           if (checkDBot('infscroll') && mar == 1) {
+              // get more content
+              mar = 0;
+              cNo = cNo + 14;
+              getInfTag(cNo, '<?php echo $tag ?>', cnt);
+              cnt = cnt + 1;
+           }
+           if (checkDBot('other<?php echo $tag; ?>news'+cntNews)) {
+              $('#newsgmc').show('slow');
+           }
+         });         
+         
+         $('body').on('click', '#newsgmc', function() {
+            $('#newsgmc').hide('slow');
+            cntNews += 1;
+            getNews('other<?php echo $tag; ?>', 1024, <?php echo $artno; ?>, 'c='+cntNews+'&', 'tag', cntNews);
+         });
          $('body').on('click', '#errhide', function() {
             hideMsg('err');
          });

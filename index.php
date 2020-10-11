@@ -37,16 +37,6 @@ include("includes/constants.php");
         </div>
       </div>
       <!-- top end -->
-      <!-- error row start -->
-      <div class="row mb-4">
-        <div class="col-md-12">
-           <div id="errbox" class="mb-3 alert alert-danger" role="alert" style="display: none;">
-             <div id="errmsg" class="w-100"></div>
-             <div class="flex-shrink-1"><button type="button" class="justify-content-end btn btn-light btn-sm" id="errhide">close</button></div>
-           </div>
-        </div>
-      </div>
-      <!-- error row end -->
       <!-- Cat 1-4 start -->
       <div class="row mb-4">
         <div class="col-md-3">
@@ -57,11 +47,6 @@ include("includes/constants.php");
               <div><small><a id="<?php echo $tags[0][1] ?>link" href="<?php echo $tags[0][1] ?>" target="_blank"><span id="<?php echo $tags[0][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[0][1] ?>updatetime"></span></small></div>
               <h4 class="mb-0"><a href="#" id="<?php echo $tags[0][1] ?>title" class="text-dark"></a></h4>
               <p class="card-text mb-auto" id="<?php echo $tags[0][1] ?>content"></p>
-            </div>
-           </div>
-           <div class="row no-gutters flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <a id="<?php echo $tags[0][1] ?>id" href="">Continue reading</a>
             </div>
            </div>
           </div>
@@ -76,11 +61,6 @@ include("includes/constants.php");
               <p class="mb-auto" id="<?php echo $tags[1][1] ?>content"></p>
             </div>
            </div>
-           <div class="row no-gutters flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <a id="<?php echo $tags[1][1] ?>id" href="">Continue reading</a>
-            </div>
-           </div>
           </div>
         </div>
         <div class="col-md-3">
@@ -93,11 +73,6 @@ include("includes/constants.php");
               <p class="mb-auto" id="<?php echo $tags[2][1] ?>content"></p>
             </div>
            </div>
-           <div class="row no-gutters flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <a id="<?php echo $tags[2][1] ?>id" href="">Continue reading</a>
-            </div>
-           </div>
           </div>
         </div>
         <div class="col-md-3">
@@ -108,11 +83,6 @@ include("includes/constants.php");
               <div><small><a id="<?php echo $tags[3][1] ?>link" href="<?php echo $tags[3][1] ?>" target="_blank"><span id="<?php echo $tags[3][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[3][1] ?>updatetime"></span></small></div>
               <h4 class="mb-0"><a href="#" id="<?php echo $tags[3][1] ?>title" class="text-dark"></a></h4>
               <p class="mb-auto" id="<?php echo $tags[3][1] ?>content"></p>
-            </div>
-           </div>
-           <div class="row no-gutters flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <a id="<?php echo $tags[3][1] ?>id" href="">Continue reading</a>
             </div>
            </div>
           </div>
@@ -131,11 +101,6 @@ include("includes/constants.php");
               <p class="card-text mb-auto" id="<?php echo $tags[4][1] ?>content"></p>
             </div>
            </div>
-           <div class="row no-gutters flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <a id="<?php echo $tags[4][1] ?>link" href="" class="stretched-link">Continue reading</a>
-            </div>
-           </div>
           </div>
         </div>
         <div class="col-md-3">
@@ -146,11 +111,6 @@ include("includes/constants.php");
               <div><small><a id="<?php echo $tags[5][1] ?>link" href="<?php echo $tags[5][1] ?>" target="_blank"><span id="<?php echo $tags[5][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[5][1] ?>updatetime"></span></small></div>
               <h4 class="mb-0"><a href="#" id="<?php echo $tags[5][1] ?>title" class="text-dark"></a></h4>
               <p class="mb-auto" id="<?php echo $tags[5][1] ?>content"></p>
-            </div>
-           </div>
-           <div class="row no-gutters flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <a id="<?php echo $tags[5][1] ?>link" href="" class="stretched-link">Continue reading</a>
             </div>
            </div>
           </div>
@@ -165,11 +125,6 @@ include("includes/constants.php");
               <p class="mb-auto" id="<?php echo $tags[6][1] ?>content"></p>
             </div>
            </div>
-           <div class="row no-gutters flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <a id="<?php echo $tags[6][1] ?>link" href="#" class="stretched-link">Continue reading</a>
-            </div>
-           </div>
           </div>
         </div>
         <div class="col-md-3">
@@ -180,11 +135,6 @@ include("includes/constants.php");
               <div><small><a id="<?php echo $tags[7][1] ?>link" href="<?php echo $tags[7][1] ?>" target="_blank"><span id="<?php echo $tags[7][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[7][1] ?>updatetime"></span></small></div>
               <h4 class="mb-0"><a href="#" id="<?php echo $tags[7][1] ?>title" class="text-dark"></a></h4>
               <p class="mb-auto" id="<?php echo $tags[7][1] ?>content"></p>
-            </div>
-           </div>
-           <div class="row no-gutters flex-md-row mb-4 position-relative">
-            <div class="col p-3 d-flex flex-column position-static">
-              <a id="<?php echo $tags[7][1] ?>link" href="#" class="stretched-link">Continue reading</a>
             </div>
            </div>
           </div>
@@ -198,7 +148,7 @@ include("includes/constants.php");
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo $tags[0][1] ?>" class="text-body"><?php echo $tags[0][0] ?></a></strong>
-              <div id="<?php echo $tags[0][1] ?>news"></div>
+              <div id="<?php echo $tags[0][1] ?>news0"></div>
             </div>
            </div>
           </div>
@@ -208,7 +158,7 @@ include("includes/constants.php");
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-danger"><a href="tag.php?t=<?php echo $tags[1][1] ?>" class="text-danger"><?php echo $tags[1][0] ?></a></strong>
-              <div id="<?php echo $tags[1][1] ?>news"></div>
+              <div id="<?php echo $tags[1][1] ?>news0"></div>
             </div>
            </div>
           </div>
@@ -218,7 +168,7 @@ include("includes/constants.php");
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-success"><a href="tag.php?t=<?php echo $tags[2][1] ?>" class="text-success"><?php echo $tags[2][0] ?></a></strong>
-              <div id="<?php echo $tags[2][1] ?>news"></div>
+              <div id="<?php echo $tags[2][1] ?>news0"></div>
             </div>
            </div>
           </div>
@@ -228,7 +178,7 @@ include("includes/constants.php");
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary"><a href="tag.php?t=<?php echo $tags[3][1] ?>" class="text-primary"><?php echo $tags[3][0] ?></a></strong>
-              <div id="<?php echo $tags[3][1] ?>news"></div>
+              <div id="<?php echo $tags[3][1] ?>news0"></div>
             </div>
            </div>
           </div>
@@ -242,7 +192,7 @@ include("includes/constants.php");
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo $tags[4][1] ?>" class="text-body"><?php echo $tags[4][0] ?></a></strong>
-              <div id="<?php echo $tags[4][1] ?>news"></div>
+              <div id="<?php echo $tags[4][1] ?>news0"></div>
             </div>
            </div>
           </div>
@@ -252,7 +202,7 @@ include("includes/constants.php");
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-danger"><a href="tag.php?t=<?php echo $tags[5][1] ?>" class="text-danger"><?php echo $tags[5][0] ?></a></strong>
-              <div id="<?php echo $tags[5][1] ?>news"></div>
+              <div id="<?php echo $tags[5][1] ?>news0"></div>
             </div>
            </div>
           </div>
@@ -262,7 +212,7 @@ include("includes/constants.php");
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-success"><a href="tag.php?t=<?php echo $tags[6][1] ?>" class="text-success"><?php echo $tags[6][0] ?></a></strong>
-              <div id="<?php echo $tags[6][1] ?>news"></div>
+              <div id="<?php echo $tags[6][1] ?>news0"></div>
             </div>
            </div>
           </div>
@@ -272,7 +222,7 @@ include("includes/constants.php");
            <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary"><a href="tag.php?t=<?php echo $tags[7][1] ?>" class="text-primary"><?php echo $tags[7][0] ?></a></strong>
-              <div id="<?php echo $tags[7][1] ?>news"></div>
+              <div id="<?php echo $tags[7][1] ?>news0"></div>
             </div>
            </div>
           </div>
@@ -297,7 +247,7 @@ include("includes/constants.php");
           </div><!-- /.blog-post -->
         </div>
         <div class="col-md-4 blog-main">
-          <div id="<?php echo $tags[8][1] ?>news"></div>
+          <div id="<?php echo $tags[8][1] ?>news0"></div>
         </div>
       </div>
       <div class="row">
@@ -316,7 +266,7 @@ include("includes/constants.php");
           </div><!-- /.blog-post -->
         </div>
         <div class="col-md-4 blog-main">
-          <div id="<?php echo $tags[10][1] ?>news"></div>
+          <div id="<?php echo $tags[10][1] ?>news0"></div>
         </div>
       </div>
       <div class="row">
@@ -335,21 +285,27 @@ include("includes/constants.php");
           </div><!-- /.blog-post -->
         </div>
         <div class="col-md-4 blog-main">
-          <div id="<?php echo $tags[9][1] ?>news"></div>
+          <div id="<?php echo $tags[9][1] ?>news0"></div>
         </div>
       </div><!-- /.blog-main -->
     </main><!-- /.container -->
+    <!-- Toast start -->    
+    <div id="toast-wrapper" class="toast text-white" role="alert" aria-live="assertive" aria-atomic="true" data-delay="8000" style="position: fixed; bottom: 5px; right: 5px;">
+      <div class="toast-body lead p-2" id="toast-body"></div>
+    </div>    
+    <!-- Toast end -->    
     <!-- Placed at the end of the document so the pages load faster -->
     <script language="JavaScript" type="text/javascript" src="assets/js/news.js"></script>
     <script type="text/javascript">
        var imto  = <?php echo $imto ?>;
        var jTags = <?php echo $jTags; ?>
+       var cntNews = 0;
          
        $(document).ready(function(){
 
          jTags.forEach(function(aRec) {
-            getNews(aRec.tag, aRec.mlen, aRec.nrec, '', 'news');
-            setInterval(function() { getNews(aRec.tag, aRec.mlen, aRec.nrec, '', 'news'); }, aRec.itv * 1000);
+            getNews(aRec.tag, aRec.mlen, aRec.nrec, 'c='+cntNews+'&', 'news', cntNews);
+            setInterval(function() { getNews(aRec.tag, aRec.mlen, aRec.nrec, 'c='+cntNews+'&', 'news', cntNews); }, aRec.itv * 1000);
          });
        });
 

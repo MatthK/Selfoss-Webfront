@@ -1,6 +1,5 @@
-﻿
-       function getNews(tag, mlen, nrec, cat, page) {
-           rNews('api/getNews.php?' + cat + 't='+tag+'&r='+nrec, cat, tag, mlen, page);
+﻿       function getNews(tag, mlen, nrec, cat, page, cnt) {
+           rNews('api/getNews.php?' + cat + 't='+tag+'&r='+nrec, cat, tag, mlen, page, cnt);
        }
 
        function hideArticle(itemid, star) {
@@ -37,12 +36,27 @@
                 }
               },
               error: function(jqXHR, textStatus) {
-                showMsg('err','Request failed: ' + textStatus,imto)
+                showToast('alert-danger','Request failed: ' + textStatus,imto)
               }
           });
        }
 
-       function rNews(rURL, cat, tag, mlen, page) {
+       function getInfTag(cNo, tag, vcnt) {
+          $.ajax({
+              url: 'api/getNews.php?c=t&' + 't='+tag+'&r='+cNo,
+              type: 'GET',
+              dataType: 'text',
+              success: function ( data ) {
+                oReply = JSON.parse( data );
+                tPage(oReply, tag, vcnt);
+              },
+              error: function(jqXHR, textStatus) {
+                showToast('alert-danger','Request failed: ' + textStatus,imto)
+              }
+          });
+       }
+ 
+       function rNews(rURL, cat, tag, mlen, page, cnt) {
           $.ajax({
               url: rURL,
               type: 'GET',
@@ -52,10 +66,10 @@
                 if (page == 'news') {
                    uNews(oReply, tag, mlen);
                 }
-                uPage(oReply, cat, tag);
+                uPage(oReply, cat, tag, cnt, page);
               },
               error: function(jqXHR, textStatus) {
-                showMsg('err','Request failed: ' + textStatus,imto)
+                showToast('alert-danger','Request failed: ' + textStatus,imto)
               }
           });
        }
@@ -75,47 +89,69 @@
           $('#' + tag + 'id').attr('href', 'article.php?i='+oReply[0].id);
        }
  
-       function uPage(oReply, cat, tag) {
+       // Infinite scroll on tag page to add more content
+       function tPage(oReply, tag, vcnt) {
           var vgC = oReply.length;
-          var vHtml = '<div>';
+          var vHtml = '';
           for (g = 1; g < vgC; g++) {
+              vHtml += '<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative"><div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-250 position-relative"><div class="col p-3 d-flex flex-column position-static">';
+              vHtml += '<div><small><a href="' + oReply[g].link + '" target="_blank"><span>' + oReply[g].Source + '</span></a> - <span class="mb-1 text-muted">' + oReply[g].updatetime + ' - ' + oReply[g].author + '</span></small></div>';
+              vHtml += '<h2 class="mb-0"><a href="article.php?i=' + oReply[g].id + '" class="text-dark">' + oReply[g].title + '</a></h2><p>&nbsp;</p>';
+              vHtml += '<p class="card-text mb-auto">' + oReply[g].content + '</p></div></div></div>';
+          }
+          let xcnt = +vcnt + 1;
+          vHtml += '</div><div id="tcontent' + xcnt + '">';
+          $('#tcontent'+vcnt).html(vHtml);
+          $('#lastrf').html(getDateTime());  // update the top left last refreshed date/time
+          mar = 1;
+       }
+
+       function uPage(oReply, cat, tag, cnt, page) {
+          var vgC = oReply.length;
+          var vHtml = '';
+          if (page == 'news') {
+             var gStart = 1;
+          } else {
+             var gStart = 0;
+          }
+          for (g = gStart; g < vgC; g++) {
              vHtml += '<div class="d-flex mb-3" id="art' + oReply[g].id + '"><div class="w-100"><p>';
              if (tag.substring(0, 5) == 'other') {
                 vHtml += '<span><a href="tag.php?t=' + oReply[g].Tags.toLowerCase() + '" class="text-dark">' + jTags[jTags.findIndex(x => x.tag === oReply[g].Tags.toLowerCase())].name + '</a></span> - ';
              }
              vHtml += '<small><a href="' + oReply[g].link + '" class="text-black-50" target="_blank">' + oReply[g].Source + '</a>&nbsp;-&nbsp;' + oReply[g].UpdateTime + '</small><br/><a href="article.php?i=' + oReply[g].id + '" class="text-dark">' + oReply[g].Title + '</a></p></div><div class="flex-shrink-1"><button type="button" class="justify-content-end btn btn-light btn-sm" id="hide' + oReply[g].id + '">x</button></div></div>';
           }
-          vHtml += '</div>';
-          if (cat == '') {
-              $('#' + tag + 'news').html(vHtml); 
-              $('#' + tag + 'news2').html(vHtml); 
+          if (cat == 'c='+cnt+'&') {
+              vHtmlm = vHtml + '</div><div id="' + tag + 'newsm' + (+cnt+1) +'">';
+              vHtml += '</div><div id="' + tag + 'news' + (+cnt+1) +'">';
+              $('#' + tag + 'news' + cnt).html(vHtml); 
+              $('#' + tag + 'newsm' + cnt).html(vHtmlm); 
           } else {
-              $('#newssrc').html(vHtml); 
+              vHtml += '</div><div id="newssrc' + (+cnt+1) +'">';
+              $('#newssrc' + cnt).html(vHtml); 
           }
           $('#lastrf').html(getDateTime());  // update the top left last refreshed date/time
        }
 
-       function showToast(msg) {
+       function showToast(type,msg,timeout) {
+          $('#toast-wrapper').attr('data-delay',timeout * 1000);
+          $('#toast-wrapper').addClass(type);
+          $('#toast-body').addClass(type);
           $('#toast-body').html(msg);
           $('.toast').toast('show');
        }       
 
-       function showMsg(box,msg,timeout) {
-          $('#'+box+'box').html(msg);
-          $('#'+box+'box').addClass('d-flex');
-          $('#'+box+'box').removeClass('invisible');
-          setTimeout(function() { hideMsg(box); }, timeout * 1000);
-       }
-
-       function hideMsg(box,) {
-          $('#'+box+'box').removeClass('d-flex');
-          $('#'+box+'box').addClass('invisible');
-          $('#'+box+'msg').html('');
-       }
-       
        function setMenu(tag) {
           $('#menu'+tag).removeClass('text-muted');
           $('#menu'+tag).addClass('btn btn-secondary');
+       }
+       
+       function checkDBot(id) {
+         if (($(window).height() + $(window).scrollTop()) >= (document.getElementById(id).style.height + document.getElementById(id).style.top)) {
+            return true;
+         } else {
+            return false;
+         }       
        }
 
        function getDateTime() {
