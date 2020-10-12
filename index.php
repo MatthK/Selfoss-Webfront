@@ -14,6 +14,7 @@ include("includes/constants.php");
     <link href="/assets/bootstrap-4.5.2-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="icon" href="assets/ico/favicon.ico">
     <script src="assets/js/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="assets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
     <meta name="theme-color" content="#563d7c">
     <style>
       .bd-placeholder-img { font-size: 1.125rem; text-anchor: middle; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
@@ -230,7 +231,9 @@ include("includes/constants.php");
       </div>
       <!-- Cat 5-6 list end -->
     </div><!-- end container -->
+    <!-- Three categories with one full article -->
     <main role="main" class="container">
+      <!-- Category 8 -->
       <div class="row">
         <div class="col-md-12 blog-main">
           <h3 class="pb-4 mb-4 font-italic border-bottom alert-primary">
@@ -250,6 +253,7 @@ include("includes/constants.php");
           <div id="<?php echo $tags[8][1] ?>news0"></div>
         </div>
       </div>
+      <!-- Category 10 -->
       <div class="row">
         <div class="col-md-12 blog-main">
           <h3 class="pb-4 mb-4 font-italic border-bottom alert-secondary">
@@ -269,6 +273,7 @@ include("includes/constants.php");
           <div id="<?php echo $tags[10][1] ?>news0"></div>
         </div>
       </div>
+      <!-- Category 9 -->
       <div class="row">
         <div class="col-md-12 blog-main">
           <h3 class="pb-4 mb-4 font-italic border-bottom alert-success">

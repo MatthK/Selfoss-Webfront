@@ -22,6 +22,7 @@ if (substr($srx, 0, 1) == '"') {
    $src = str_replace(" ", "%", $srx);
    $src = "%" . $src . "%";
 }
+/* Get the first 15 search results */
 $query = $mysqli->prepare("SELECT DISTINCT S.id, S.Title, C.Content, S.UpdateTime, S.Tags, C.link, O.title AS 'Source', C.author FROM (SELECT HTML_UnEncode(I.title) as 'Title', MIN(I.datetime) AS 'UpdateTime', CASE WHEN LOCATE(',', GROUP_CONCAT(S.tags)) > 0 THEN LEFT(GROUP_CONCAT(S.tags), LOCATE(',', GROUP_CONCAT(S.tags))-1) ELSE GROUP_CONCAT(S.tags) END AS 'Tags', MIN(I.id) AS 'id' FROM items I INNER JOIN sources S ON I.source = S.id WHERE I.title LIKE ? OR I.content LIKE ? GROUP BY HTML_UnEncode(I.title)) S INNER JOIN items C ON S.Title = HTML_UnEncode(C.title) AND S.UpdateTime = C.DateTime INNER JOIN sources O ON C.source = O.id ORDER BY UpdateTime DESC LIMIT 15");
 $query->bind_param("ss", $src, $src);
 $query->execute();
@@ -30,6 +31,7 @@ while($row = mysqli_fetch_assoc($result)){
    $rSet[] = $row;
 }
 $result -> free();
+/* Get the number of articles */
 $query = $mysqli->prepare("SELECT COUNT(DISTINCT S.id) AS NoRec FROM (SELECT HTML_UnEncode(I.title) as 'Title', MIN(I.datetime) AS 'UpdateTime', CASE WHEN LOCATE(',', GROUP_CONCAT(S.tags)) > 0 THEN LEFT(GROUP_CONCAT(S.tags), LOCATE(',', GROUP_CONCAT(S.tags))-1) ELSE GROUP_CONCAT(S.tags) END AS 'Tags', MIN(I.id) AS 'id' FROM items I INNER JOIN sources S ON I.source = S.id WHERE I.title LIKE ? OR I.content LIKE ? GROUP BY HTML_UnEncode(I.title)) S INNER JOIN items C ON S.Title = HTML_UnEncode(C.title) AND S.UpdateTime = C.DateTime INNER JOIN sources O ON C.source = O.id");
 $query->bind_param("ss", $src, $src);
 $query->execute();
@@ -53,6 +55,7 @@ $mysqli -> close();
     <link href="/assets/bootstrap-4.5.2-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="icon" href="assets/ico/favicon.ico">
     <script src="assets/js/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="assets/bootstrap-4.5.2-dist/js/bootstrap.min.js"></script>
     <meta name="theme-color" content="#563d7c">
     <style>
       .bd-placeholder-img { font-size: 1.125rem; text-anchor: middle; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
@@ -119,7 +122,6 @@ $mysqli -> close();
         <!-- Other news right end -->
       </div>
       <!-- content rows end -->
-
     </div>
     <!-- Toast start -->    
     <div id="toast-wrapper" class="toast text-white" role="alert" aria-live="assertive" aria-atomic="true" data-delay="8000" style="position: fixed; bottom: 5px; right: 5px;">

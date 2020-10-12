@@ -92,9 +92,11 @@
           $('#' + tag + 'link').attr('href', oReply[0].link);
           $('#' + tag + 'title').attr('href', 'article.php?i='+oReply[0].id);
           $('#' + tag + 'id').attr('href', 'article.php?i='+oReply[0].id);
+          $('#lastrf').html(getDateTime());  // update the top left last refreshed date/time
+          $('#lastrfm').html(getDateTime());  // update the top left last refreshed date/time for mobiles
        }
  
-       // Infinite scroll on tag page to add more content
+       // Infinite scroll on tag + search page to add more content
        function tPage(oReply, tag, vcnt) {
           var vgC = oReply.length;
           var vHtml = '';
@@ -108,6 +110,7 @@
           vHtml += '</div><div id="tcontent' + xcnt + '">';
           $('#tcontent'+vcnt).html(vHtml);
           $('#lastrf').html(getDateTime());  // update the top left last refreshed date/time
+          $('#lastrfm').html(getDateTime());  // update the top left last refreshed date/time for mobiles
           mar = 1;
        }
 
@@ -136,6 +139,7 @@
               $('#newssrc' + cnt).html(vHtml); 
           }
           $('#lastrf').html(getDateTime());  // update the top left last refreshed date/time
+          $('#lastrfm').html(getDateTime());  // update the top left last refreshed date/time for mobiles
        }
 
        function showToast(type,msg,timeout) {
