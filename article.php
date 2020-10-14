@@ -74,10 +74,10 @@ function searchKey($id, $array) {
   <body>
     <div class="container">
 <?php include("includes/news_header.php"); ?>
-      <div class="row mb-4">
+      <div class="row mb-2">
         <div class="col-md-3 d-none d-sm-block">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo strtolower($rSet[0]["tags"]); ?>" class="text-body"><?php echo $tag; ?></a></strong>
               <div id="<?php echo strtolower($rSet[0]["tags"]) ?>news0"></div>
@@ -87,8 +87,8 @@ function searchKey($id, $array) {
           </div>
         </div>
         <div class="col-md-6">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-3 d-flex flex-column position-static" id="article" aid="<?php echo $id; ?>">
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo strtolower($rSet[0]["tags"]); ?>" class="text-body"><?php echo $tag; ?></a></strong>
               <div class="d-flex mb-1 text-muted"><div class="w-100"><small><?php echo $rSet[0]["source"] ?> - <?php echo $rSet[0]["updatetime"] ?> - <?php echo $rSet[0]["author"] ?></small></div><div class="flex-shrink-1"><button type="button" class="justify-content-end btn <?php echo $class; ?> btn-sm" id="artstar" aid="<?php echo $id; ?>">*</button></div></div>
@@ -100,8 +100,8 @@ function searchKey($id, $array) {
           </div>
         </div>
         <div class="col-md-3 d-block d-sm-none">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><?php echo $rSet[0]["tags"] ?></strong>
               <div id="<?php echo strtolower($rSet[0]["tags"]) ?>newsm0"></div>
@@ -111,8 +111,8 @@ function searchKey($id, $array) {
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><?php echo $rSet[0]["source"] ?></strong>
               <div id="newssrc0"></div>
@@ -152,8 +152,6 @@ function searchKey($id, $array) {
                 let hid = $('#article').attr('aid');
                 hideArticle(hid);
                 mar = 0;
-                showToast('alert-primary','Article has been marked as read',<?php echo $imto; ?>);
-
             }, <?php echo $smar; ?> * 1000);
          }
          
@@ -163,7 +161,6 @@ function searchKey($id, $array) {
               let hid = $('#article').attr('aid');
               hideArticle(hid);
               mar = 0; // don't trigger this again
-              showToast('alert-primary','Article has been marked as read',<?php echo $imto; ?>);
            }
            if (checkDBot('<?php echo strtolower($rSet[0]["tags"]) ?>news'+cntNews)) {
               $('#newsgmc').show('slow');

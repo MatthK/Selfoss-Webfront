@@ -15,6 +15,9 @@
              var adcls = 'btn-secondary';
              var msg = 'The article has been unmarked';
              jstar = 1;
+          } else if (star == 2) {
+             var str = '';
+             jstar = 2;
           } else {
              var str = '';
           }
@@ -23,9 +26,14 @@
               type: 'GET',
               dataType: 'json',
               success: function ( data ) {
-                if (str == '') {
+                if (star == 2) {
+                   $('#btn'+itemid).hide('slow');
+                   $('#read'+itemid).hide('slow');
+                   showToast('alert-primary','The article has been marked as read', imto)
+                } else if (str == '') {
                    $('#art'+itemid).removeClass('d-flex');
                    $('#art'+itemid).addClass('d-none');
+                   showToast('alert-primary','The article has been marked as read', imto);
                 } else {
                    $('#infobox').html(msg);
                    $('#infobox').addClass('d-flex');
@@ -36,7 +44,7 @@
                 }
               },
               error: function(jqXHR, textStatus) {
-                showToast('alert-danger','Request failed: ' + textStatus,imto)
+                showToast('alert-danger','The article is not updated. Request failed: ' + textStatus,imto)
               }
           });
        }
@@ -145,6 +153,8 @@
        function showToast(type,msg,timeout) {
           $('#toast-wrapper').attr('data-delay',timeout * 1000);
           $('#toast-wrapper').addClass(type);
+          $('#toast-body').removeClass('alert-danger');
+          $('#toast-body').removeClass('alert-primary');
           $('#toast-body').addClass(type);
           $('#toast-body').html(msg);
           $('.toast').toast('show');

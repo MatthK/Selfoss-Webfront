@@ -39,10 +39,10 @@ include("includes/constants.php");
       </div>
       <!-- top end -->
       <!-- Cat 1-4 start -->
-      <div class="row mb-4">
+      <div class="row mb-2">
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-400 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 h-md-400 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo $tags[0][1] ?>" class="text-body"><?php echo $tags[0][0] ?></a></strong>
               <div><small><a id="<?php echo $tags[0][1] ?>link" href="<?php echo $tags[0][1] ?>" target="_blank"><span id="<?php echo $tags[0][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[0][1] ?>updatetime"></span></small></div>
@@ -53,8 +53,8 @@ include("includes/constants.php");
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-400 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 h-md-400 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-danger"><a href="tag.php?t=<?php echo $tags[1][1] ?>" class="text-danger"><?php echo $tags[1][0] ?></a></strong>
               <div><small><a id="<?php echo $tags[1][1] ?>link" href="<?php echo $tags[1][1] ?>" target="_blank"><span id="<?php echo $tags[1][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[1][1] ?>updatetime"></span></small></div>
@@ -65,8 +65,8 @@ include("includes/constants.php");
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-400 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 h-md-400 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-success"><a href="tag.php?t=<?php echo $tags[2][1] ?>" class="text-success"><?php echo $tags[2][0] ?></a></strong>
               <div><small><a id="<?php echo $tags[2][1] ?>link" href="<?php echo $tags[2][1] ?>" target="_blank"><span id="<?php echo $tags[2][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[2][1] ?>updatetime"></span></small></div>
@@ -77,8 +77,8 @@ include("includes/constants.php");
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-400 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 h-md-400 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary"><a href="tag.php?t=<?php echo $tags[3][1] ?>" class="text-primary"><?php echo $tags[3][0] ?></a></strong>
               <div><small><a id="<?php echo $tags[3][1] ?>link" href="<?php echo $tags[3][1] ?>" target="_blank"><span id="<?php echo $tags[3][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[3][1] ?>updatetime"></span></small></div>
@@ -91,10 +91,10 @@ include("includes/constants.php");
       </div>
       <!-- Cat 1-4 end -->
       <!-- Cat 5-8 start -->
-      <div class="row mb-4">
+      <div class="row mb-2">
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-400 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 h-md-400 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo $tags[4][1] ?>" class="text-body"><?php echo $tags[4][0] ?></a></strong>
               <div><small><a id="<?php echo $tags[4][1] ?>link" href="<?php echo $tags[4][1] ?>" target="_blank"><span id="<?php echo $tags[4][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[4][1] ?>updatetime"></span></small></div>
@@ -105,8 +105,8 @@ include("includes/constants.php");
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-400 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 h-md-400 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-danger"><a href="tag.php?t=<?php echo $tags[5][1] ?>" class="text-danger"><?php echo $tags[5][0] ?></a></strong>
               <div><small><a id="<?php echo $tags[5][1] ?>link" href="<?php echo $tags[5][1] ?>" target="_blank"><span id="<?php echo $tags[5][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[5][1] ?>updatetime"></span></small></div>
@@ -117,8 +117,8 @@ include("includes/constants.php");
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-400 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 h-md-400 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-success"><a href="tag.php?t=<?php echo $tags[6][1] ?>" class="text-success"><?php echo $tags[6][0] ?></a></strong>
               <div><small><a id="<?php echo $tags[6][1] ?>link" href="<?php echo $tags[6][1] ?>" target="_blank"><span id="<?php echo $tags[6][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[6][1] ?>updatetime"></span></small></div>
@@ -129,8 +129,8 @@ include("includes/constants.php");
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-400 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 h-md-400 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary"><a href="tag.php?t=<?php echo $tags[7][1] ?>" class="text-primary"><?php echo $tags[7][0] ?></a></strong>
               <div><small><a id="<?php echo $tags[7][1] ?>link" href="<?php echo $tags[7][1] ?>" target="_blank"><span id="<?php echo $tags[7][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[7][1] ?>updatetime"></span></small></div>
@@ -143,10 +143,10 @@ include("includes/constants.php");
       </div>
       <!-- Cat 5-8 end -->
       <!-- Cat 1-4 list start -->
-      <div class="row mb-4">
+      <div class="row mb-2">
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo $tags[0][1] ?>" class="text-body"><?php echo $tags[0][0] ?></a></strong>
               <div id="<?php echo $tags[0][1] ?>news0"></div>
@@ -155,8 +155,8 @@ include("includes/constants.php");
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-danger"><a href="tag.php?t=<?php echo $tags[1][1] ?>" class="text-danger"><?php echo $tags[1][0] ?></a></strong>
               <div id="<?php echo $tags[1][1] ?>news0"></div>
@@ -165,8 +165,8 @@ include("includes/constants.php");
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-success"><a href="tag.php?t=<?php echo $tags[2][1] ?>" class="text-success"><?php echo $tags[2][0] ?></a></strong>
               <div id="<?php echo $tags[2][1] ?>news0"></div>
@@ -175,8 +175,8 @@ include("includes/constants.php");
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary"><a href="tag.php?t=<?php echo $tags[3][1] ?>" class="text-primary"><?php echo $tags[3][0] ?></a></strong>
               <div id="<?php echo $tags[3][1] ?>news0"></div>
@@ -187,10 +187,10 @@ include("includes/constants.php");
       </div>
       <!-- Cat 1-4 list end -->
       <!-- Cat 5-6 list start -->
-      <div class="row mb-4">
+      <div class="row mb-2">
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo $tags[4][1] ?>" class="text-body"><?php echo $tags[4][0] ?></a></strong>
               <div id="<?php echo $tags[4][1] ?>news0"></div>
@@ -199,8 +199,8 @@ include("includes/constants.php");
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-danger"><a href="tag.php?t=<?php echo $tags[5][1] ?>" class="text-danger"><?php echo $tags[5][0] ?></a></strong>
               <div id="<?php echo $tags[5][1] ?>news0"></div>
@@ -209,8 +209,8 @@ include("includes/constants.php");
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-success"><a href="tag.php?t=<?php echo $tags[6][1] ?>" class="text-success"><?php echo $tags[6][0] ?></a></strong>
               <div id="<?php echo $tags[6][1] ?>news0"></div>
@@ -219,8 +219,8 @@ include("includes/constants.php");
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary"><a href="tag.php?t=<?php echo $tags[7][1] ?>" class="text-primary"><?php echo $tags[7][0] ?></a></strong>
               <div id="<?php echo $tags[7][1] ?>news0"></div>
@@ -236,7 +236,7 @@ include("includes/constants.php");
       <!-- Category 8 -->
       <div class="row">
         <div class="col-md-12 blog-main">
-          <h3 class="pb-4 mb-4 font-italic border-bottom alert-primary">
+          <h3 class="pb-4 mb-2 font-italic border-bottom alert-primary">
             <a href="tag.php?t=<?php echo $tags[8][1] ?>" class="text-primary"><?php echo $tags[8][0] ?></a>
           </h3>
         </div>
@@ -256,7 +256,7 @@ include("includes/constants.php");
       <!-- Category 10 -->
       <div class="row">
         <div class="col-md-12 blog-main">
-          <h3 class="pb-4 mb-4 font-italic border-bottom alert-secondary">
+          <h3 class="pb-4 mb-2 font-italic border-bottom alert-secondary">
             <a href="tag.php?t=<?php echo $tags[10][1] ?>" class="text-secondary"><?php echo $tags[10][0] ?></a>
           </h3>
         </div>
@@ -276,7 +276,7 @@ include("includes/constants.php");
       <!-- Category 9 -->
       <div class="row">
         <div class="col-md-12 blog-main">
-          <h3 class="pb-4 mb-4 font-italic border-bottom alert-success">
+          <h3 class="pb-4 mb-2 font-italic border-bottom alert-success">
             <a href="tag.php?t=<?php echo $tags[9][1] ?>" class="text-success"><?php echo $tags[9][0] ?></a>
           </h3>
         </div>

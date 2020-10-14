@@ -1,5 +1,5 @@
       <!-- Only show on mobile -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light d-sm-none">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light d-md-none">
         <a class="navbar-brand" href="index.php"><?php echo $npName ?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#srxfrm" aria-controls="srxfrm" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,7 @@
         </div>
       </nav>
       <!-- Do not show on mobile -->
-      <header class="blog-header py-3 d-none d-sm-block">
+      <header class="blog-header py-3 d-none d-md-block">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-3 pt-1">
             <small><span class="d-none d-sm-block">Last refreshed on </span><span id="lastrf"><?php echo date("d.m.Y H:i:s") ?></span></small>

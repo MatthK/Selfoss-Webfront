@@ -55,16 +55,17 @@ $mysqli -> close();
     <div class="container">
 <?php include("includes/news_header.php"); ?>
       <!-- top row start -->
-      <div class="row mb-4">
+      <div class="row mb-2">
         <!-- Header left start -->
         <div class="col-md-6">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-500 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 h-md-500 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <div><small><a href="<?php echo $rSet[0]["link"]; ?>l" target="_blank"><span><?php echo $rSet[0]["source"]; ?></span></a> - <span class="mb-1 text-muted"><?php echo $rSet[0]["updatetime"]; ?> - <?php echo $rSet[0]["author"] ?></span></small></div>
               <h2 class="mb-0"><a href="article.php?i=<?php echo $rSet[0]["id"]; ?>" class="text-dark"><?php echo $rSet[0]["title"]; ?></a></h2>
               <p>&nbsp;</p>
-              <p class="card-text mb-auto"><?php echo $rSet[0]["content"]; ?></p>
+              <div class="card-text mb-auto"><?php echo $rSet[0]["content"]; ?></div>
+              <div class="d-flex flex-row-reverse d-md-none" id="btn<?php echo $rSet[0]["id"]?>"><button type="button" class="btn-light btn-sm" id="read<?php echo $rSet[0]["id"]?>">Mark as read</button></div>
             </div>
            </div>
           </div>
@@ -72,13 +73,14 @@ $mysqli -> close();
         <!-- Header left end -->
         <!-- Header right start -->
         <div class="col-md-6">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-500 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 h-md-500 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <div><small><a href="<?php echo $rSet[1]["link"]; ?>l" target="_blank"><span><?php echo $rSet[1]["source"]; ?></span></a> - <span class="mb-1 text-muted"><?php echo $rSet[1]["updatetime"]; ?> - <?php echo $rSet[1]["author"] ?></span></small></div>
               <h2 class="mb-0"><a href="article.php?i=<?php echo $rSet[1]["id"]; ?>" class="text-dark"><?php echo $rSet[1]["title"]; ?></a></h2>
               <p>&nbsp;</p>
-              <p class="card-text mb-auto"><?php echo $rSet[1]["content"]; ?></p>
+              <div class="card-text mb-auto"><?php echo $rSet[1]["content"]; ?></div>
+              <div class="d-flex flex-row-reverse d-md-none" id="btn<?php echo $rSet[1]["id"]?>"><button type="button" class="btn-light btn-sm" id="read<?php echo $rSet[1]["id"]?>">Mark as read</button></div>
             </div>
            </div>
           </div>
@@ -87,18 +89,19 @@ $mysqli -> close();
       </div>
       <!-- top row end -->
       <!-- content rows start -->
-      <div class="row mb-4">
+      <div class="row mb-2">
         <!-- Content cards start -->
         <div class="col-md-9">
          <div id="tcontent">
 <?php for ($i = 2; $i < count($rSet); $i++) { ?>        
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 h-md-250 position-relative">
             <div class="col p-3 d-flex flex-column position-static">
               <div><small><a href="<?php echo $rSet[$i]["link"]; ?>" target="_blank"><span><?php echo $rSet[$i]["source"]; ?></span></a> - <span class="mb-1 text-muted"><?php echo $rSet[$i]["updatetime"]; ?> - <?php echo $rSet[$i]["author"] ?></span></small></div>
               <h2 class="mb-0"><a href="article.php?i=<?php echo $rSet[$i]["id"]; ?>" class="text-dark"><?php echo $rSet[$i]["title"]; ?></a></h2>
               <p>&nbsp;</p>
-              <p class="card-text mb-auto"><?php echo $rSet[$i]["content"]; ?></p>
+              <div class="card-text mb-auto"><?php echo $rSet[$i]["content"]; ?></div>
+              <div class="d-flex flex-row-reverse d-md-none" id="btn<?php echo $rSet[i]["id"]?>"><button type="button" class="btn-light btn-sm" id="read<?php echo $rSet[i]["id"]?>">Mark as read</button></div>
             </div>
            </div>
           </div>
@@ -111,8 +114,8 @@ $mysqli -> close();
         <!-- Content cards end -->
         <!-- Other news start -->
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body" id="onstr">Other news</strong>
               <div id="other<?php echo $tag; ?>news0"></div>
@@ -174,8 +177,13 @@ $mysqli -> close();
          $('body').on('click', 'button', function() {
             $(this).off('click');
             let vid = $(this).attr('id');
-            let hid = vid.substr(4,vid.length);
-            hideArticle(hid);
+            if (vid.substr(0, 4) == 'read') {
+               let hid = vid.substr(4,vid.length);
+               hideArticle(hid, 2);
+            } else {
+               let hid = vid.substr(4,vid.length);
+               hideArticle(hid);
+            }
          });
          
        });

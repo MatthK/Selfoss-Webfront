@@ -70,28 +70,28 @@ $mysqli -> close();
     <div class="container">
 <?php include("includes/news_header.php"); ?>
       <!-- content rows start -->
-      <div class="row mb-4">
+      <div class="row mb-2">
         <!-- Content cards start -->
         <div class="col-md-9">
          <div id="tcontent">
 <?php if (count($rSet) == 0) { ?>
-          <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <h2 class="mb-0">Search term <?php echo $src ?> found no records</h2>
             </div>
            </div>
           </div>
 <?php } else { ?>          
-          <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-1 d-flex flex-column position-static">
               <p>A total of <?php echo $NoRec["NoRec"]; ?> records match your search criteria</p>
             </div>
           </div>
 <?php } ?>          
 <?php for ($i = 0; $i < count($rSet); $i++) { ?>
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 h-md-250 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <div><small><a href="<?php echo $rSet[$i]["link"]; ?>" target="_blank"><span><?php echo $rSet[$i]["Source"]; ?></span></a> - <span class="mb-1 text-muted"><?php echo $rSet[$i]["UpdateTime"]; ?> - <?php echo $rSet[$i]["author"] ?></span></small></div>
               <h2 class="mb-0"><a href="article.php?i=<?php echo $rSet[$i]["id"]; ?>" class="text-dark"><?php echo $rSet[$i]["Title"]; ?></a></h2>
@@ -109,8 +109,8 @@ $mysqli -> close();
         <!-- Content cards end -->
         <!-- Other news start -->
         <div class="col-md-3">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-           <div class="row no-gutters overflow-hidden flex-md-row mb-4 position-relative">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-2 shadow-sm position-relative">
+           <div class="row no-gutters overflow-hidden flex-md-row mb-2 position-relative">
             <div class="col p-2 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-body" id="onstr">Other news</strong>
               <div id="news0"></div>
