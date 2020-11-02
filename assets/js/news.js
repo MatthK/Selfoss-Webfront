@@ -112,7 +112,8 @@
               vHtml += '<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative"><div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-250 position-relative"><div class="col p-2 d-flex flex-column position-static">';
               vHtml += '<div><small><a href="' + oReply[g].link + '" target="_blank"><span>' + oReply[g].Source + '</span></a> - <span class="mb-1 text-muted">' + oReply[g].updatetime + ' - ' + oReply[g].author + '</span></small></div>';
               vHtml += '<h2 class="mb-0"><a href="article.php?i=' + oReply[g].id + '" class="text-dark">' + oReply[g].title + '</a></h2><p>&nbsp;</p>';
-              vHtml += '<p class="card-text mb-auto">' + oReply[g].content + '</p></div></div></div>';
+              vHtml += '<div class="card-text mb-auto">' + oReply[g].content + '</div>';
+              vHtml += '<div class="d-flex flex-row-reverse d-md-none" id="btn' + oReply[g].id + '"><button type="button" class="btn-light btn-sm" id="read' + oReply[g].id + '">Mark as read</button></div></div></div></div>';
           }
           let xcnt = +vcnt + 1;
           vHtml += '</div><div id="tcontent' + xcnt + '">';
