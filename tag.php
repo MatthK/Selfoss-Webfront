@@ -100,7 +100,7 @@ $mysqli -> close();
               <div><small><a href="<?php echo $rSet[$i]["link"]; ?>" target="_blank"><span><?php echo $rSet[$i]["source"]; ?></span></a> - <span class="mb-1 text-muted"><?php echo $rSet[$i]["updatetime"]; ?> - <?php echo $rSet[$i]["author"] ?></span></small></div>
               <h2 class="mb-0"><a href="article.php?i=<?php echo $rSet[$i]["id"]; ?>" class="text-dark"><?php echo $rSet[$i]["title"]; ?></a></h2>
               <p>&nbsp;</p>
-              <div class="card-text mb-auto"><?php echo $rSet[$i]["content"]; ?></div>
+              <div class="card-text mb-auto overflow-hidden h-250"><?php echo $rSet[$i]["content"]; ?></div>
               <div class="d-flex flex-row-reverse d-md-none" id="btn<?php echo $rSet[i]["id"]?>"><button type="button" class="btn-light btn-sm" id="read<?php echo $rSet[i]["id"]?>">Mark as read</button></div>
             </div>
            </div>
