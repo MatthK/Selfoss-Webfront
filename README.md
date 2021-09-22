@@ -1,6 +1,6 @@
 # selfoss - Webfront
 
-This is newspaper style webfront for the selfoss RSS reader (https://github.com/fossar/selfoss).
+This is newspaper style webfront for the [selfoss RSS reader](https://github.com/fossar/selfoss).
 
 I never liked RSS readers very much as the user interface is just plain ugly. I wanted to have
 a nice looking user interface that feels like a newspaper, and not like some technical list. 
@@ -9,7 +9,7 @@ that can fetch the full article (with some limits), I felt I want to use that as
 personal "Morning Post".
 
 - Website that looks like a newspaper
-- Based on Bootstrap blog example (https://getbootstrap.com/docs/4.5/examples/blog/)
+- Based on Bootstrap blog [example](https://getbootstrap.com/docs/4.5/examples/blog/)
 - Fixed to 11 categories
 
 ## Features
@@ -48,21 +48,21 @@ The article page shows a single article in the middle, while the left hand shows
 
 ## Installation
 
-You need to have selfoss (https://github.com/fossar/selfoss) installed first. Please revert to that installation instructions to get selfoss going first. Use a MySQL database as the backend to make sure it works out of the box. I have not tried it with Sqlite or PostgreSQL databases. It might work, but I haven't tested it.
+You need to have [selfoss](https://github.com/fossar/selfoss) installed first. Please revert to that installation instructions to get selfoss going first. Use a MySQL database as the backend to make sure it works out of the box. I have not tried it with Sqlite or PostgreSQL databases. It might work, but I haven't tested it.
 Also when you setup your feeds in selfoss, make sure to use the "RSS Feed (with FullTextRss)" in Type. This should pull the full article to your database instead of just the teasers from the RSS feed itself.
 ![](./screenshots/fulltextrss.png)
 In the Tags field, you can enter multiple values, but my website will only consider the first value.
-When I installed selfoss, I first struggled with the setup of the database. My selfoss user didn't have full admin rights and struggled to install the necessary triggers. When I used the root user for the initial install, it worked. I then changed the settings back to a more restricted selfoss user and it seems to work just fine. So once you installed the files and stuff, go to http://selfoss/cliupdate.php and run that twice. The first time it showed an error, but the second time it seem to work. When you then go to the index.php it should be up and running and you can add your feeds.
+When I installed selfoss, I first struggled with the setup of the database. My selfoss user didn't have full admin rights and struggled to install the necessary triggers. When I used the root user for the initial install, it worked. I then changed the settings back to a more restricted selfoss user and it seems to work just fine. So once you installed the files and stuff, go to <http://selfoss/cliupdate.php> and run that twice. The first time it showed an error, but the second time it seem to work. When you then go to the index.php it should be up and running and you can add your feeds.
 
 Once selfoss is up and has some content downloaded, you can install this webfront.
 
-1. To keep things clean(er), I suggest to create a separate virtual website/host on the same (or a different) machine. I have used an nginx webserver and this tutorial on Step 5 shows the basics (https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04). Set index.php as the index page so it defaults to that page. 
+1. To keep things clean(er), I suggest to create a separate virtual website/host on the same (or a different) machine. I have used an nginx webserver and this tutorial on Step 5 shows the [basics](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04). Set `index.php` as the index page so it defaults to that page. 
 2. Clone the repository into the folder where you want to host the site 
    Create the directory `sudo mkdir /var/www/selfoss-webfront/`
    Go into that directory `cd /var/www/selfoss-webfront/'
    Clone this repository `sudo git clone https://github.com/MatthK/Selfoss-Webfront`
 3. Adjust the settings/variables in the `/includes/constants.php` file. There are comments in the file. You have to define your database details and also add the 11 categories/tags in the array below. The first column is for the visible category names. These can include spaces, while the second column should avoid spaces or special characters.
-4. You also have to create a function in the database. Simply run the HTML_UnEncode.sql in the MySQL database once to create the function
+4. You also have to create a function in the database. Simply run the `HTML_UnEncode.sql` in the MySQL database once to create the function
 5. Enjoy
 6. Optional: Add a reverse proxy in front (or open the port) to the virtual website to have access to the newspaper from outside your network. I am using a reverse proxy with personal certificate to secure the site.
 
