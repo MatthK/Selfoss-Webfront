@@ -48,6 +48,11 @@ The article page shows a single article in the middle, while the left hand shows
 
 ## Installation
 
+### Docker
+Head over to the [Docker](https://github.com/MatthK/swfd) rep where you have all in one Docker Compose solution.
+
+### Manual
+
 You need to have [selfoss](https://github.com/fossar/selfoss) installed first. Please revert to that installation instructions to get selfoss going first. Use a MySQL database as the backend to make sure it works out of the box. I have not tried it with Sqlite or PostgreSQL databases. It might work, but I haven't tested it.
 Also when you setup your feeds in selfoss, make sure to use the "RSS Feed (with FullTextRss)" in Type. This should pull the full article to your database instead of just the teasers from the RSS feed itself.
 ![](./screenshots/fulltextrss.png)
