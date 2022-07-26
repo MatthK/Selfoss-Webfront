@@ -29,7 +29,7 @@ include("includes/constants.php");
     <div class="container">
 <?php include("includes/news_header.php"); ?>
       <!-- top start -->
-      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+      <div class="jumbotron p-3 p-md-5 text-white rounded overflow-hidden bg-dark">
         <div class="col-md-10 px-0">
           <div><small><a id="<?php echo $tags[11][1] ?>link" href="<?php echo $tags[11][1] ?>" class="text-white" target="_blank"><span id="<?php echo $tags[11][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[11][1] ?>updatetime"></span></small></div>
           <h1 class="display-4 font-italic"><a href="#" id="<?php echo $tags[11][1] ?>title" class="text-white"></a></h1>
