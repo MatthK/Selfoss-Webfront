@@ -242,7 +242,7 @@ include("includes/constants.php");
         </div>
       </div>
       <div class="row">
-        <div class="col-md-8 blog-main">
+        <div class="col-md-8 overflow-hidden blog-main">
           <div class="blog-post">
             <div><small><a id="<?php echo $tags[8][1] ?>link" href="#"><span id="<?php echo $tags[8][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[8][1] ?>updatetime"></span></small></div>
             <h2 class="blog-post-title"><a href="#" id="<?php echo $tags[8][1] ?>title" class="text-dark"></a></h2>
@@ -262,7 +262,7 @@ include("includes/constants.php");
         </div>
       </div>
       <div class="row">
-        <div class="col-md-8 blog-main">
+        <div class="col-md-8 overflow-hidden blog-main">
           <div class="blog-post">
             <div><small><a id="<?php echo $tags[10][1] ?>link" href="#"><span id="<?php echo $tags[10][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[10][1] ?>updatetime"></span></small></div>
             <h2 class="blog-post-title"><a href="#" id="<?php echo $tags[10][1] ?>title" class="text-dark"></a></h2>
@@ -282,7 +282,7 @@ include("includes/constants.php");
         </div>
       </div>
       <div class="row">
-        <div class="col-md-8 blog-main">
+        <div class="col-md-8 overflow-hidden blog-main">
           <div class="blog-post">
             <div><small><a id="<?php echo $tags[9][1] ?>link" href="#"><span id="<?php echo $tags[9][1] ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo $tags[9][1] ?>updatetime"></span></small></div>
             <h2 class="blog-post-title"><a href="#" id="<?php echo $tags[9][1] ?>title" class="text-dark"></a></h2>
