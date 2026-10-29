@@ -1,5 +1,9 @@
 <?php
 include(__DIR__ . "/includes/constants.php");
+// A user-supplied constants.php is bind-mounted over includes/constants.php
+// in the Docker setup and may be an older file that does not include
+// helpers.php - load the helper functions (esc, jsv, safe_url) regardless.
+include_once(__DIR__ . "/includes/helpers.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -32,7 +36,7 @@ include(__DIR__ . "/includes/constants.php");
         <div class="col-md-10 px-0">
           <div><small><a id="<?php echo esc($tags[11][1]) ?>link" href="<?php echo esc($tags[11][1]) ?>" class="text-white" target="_blank"><span id="<?php echo esc($tags[11][1]) ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo esc($tags[11][1]) ?>updatetime"></span></small></div>
           <h1 class="display-4 font-italic"><a href="#" id="<?php echo esc($tags[11][1]) ?>title" class="text-white"></a></h1>
-          <p class="lead my-3" id="<?php echo esc($tags[11][1]) ?>content"></p>
+          <div class="lead my-3" id="<?php echo esc($tags[11][1]) ?>content"></div>
           <p class="lead mb-0"><a id="<?php echo esc($tags[11][1]) ?>id" href="#" class="text-white font-weight-bold">Continue reading...</a></p>
         </div>
       </div>
@@ -46,7 +50,7 @@ include(__DIR__ . "/includes/constants.php");
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo esc($tags[0][1]) ?>" class="text-body"><?php echo esc($tags[0][0]) ?></a></strong>
               <div><small><a id="<?php echo esc($tags[0][1]) ?>link" href="<?php echo esc($tags[0][1]) ?>" target="_blank"><span id="<?php echo esc($tags[0][1]) ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo esc($tags[0][1]) ?>updatetime"></span></small></div>
               <h4 class="mb-0"><a href="#" id="<?php echo esc($tags[0][1]) ?>title" class="text-dark"></a></h4>
-              <p class="card-text mb-auto" id="<?php echo esc($tags[0][1]) ?>content"></p>
+              <div class="card-text mb-auto" id="<?php echo esc($tags[0][1]) ?>content"></div>
             </div>
            </div>
           </div>
@@ -58,7 +62,7 @@ include(__DIR__ . "/includes/constants.php");
               <strong class="d-inline-block mb-2 text-danger"><a href="tag.php?t=<?php echo esc($tags[1][1]) ?>" class="text-danger"><?php echo esc($tags[1][0]) ?></a></strong>
               <div><small><a id="<?php echo esc($tags[1][1]) ?>link" href="<?php echo esc($tags[1][1]) ?>" target="_blank"><span id="<?php echo esc($tags[1][1]) ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo esc($tags[1][1]) ?>updatetime"></span></small></div>
               <h4 class="mb-0"><a href="#" id="<?php echo esc($tags[1][1]) ?>title" class="text-dark"></a></h4>
-              <p class="mb-auto" id="<?php echo esc($tags[1][1]) ?>content"></p>
+              <div class="card-text mb-auto" id="<?php echo esc($tags[1][1]) ?>content"></div>
             </div>
            </div>
           </div>
@@ -70,7 +74,7 @@ include(__DIR__ . "/includes/constants.php");
               <strong class="d-inline-block mb-2 text-success"><a href="tag.php?t=<?php echo esc($tags[2][1]) ?>" class="text-success"><?php echo esc($tags[2][0]) ?></a></strong>
               <div><small><a id="<?php echo esc($tags[2][1]) ?>link" href="<?php echo esc($tags[2][1]) ?>" target="_blank"><span id="<?php echo esc($tags[2][1]) ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo esc($tags[2][1]) ?>updatetime"></span></small></div>
               <h4 class="mb-0"><a href="#" id="<?php echo esc($tags[2][1]) ?>title" class="text-dark"></a></h4>
-              <p class="mb-auto" id="<?php echo esc($tags[2][1]) ?>content"></p>
+              <div class="card-text mb-auto" id="<?php echo esc($tags[2][1]) ?>content"></div>
             </div>
            </div>
           </div>
@@ -82,7 +86,7 @@ include(__DIR__ . "/includes/constants.php");
               <strong class="d-inline-block mb-2 text-primary"><a href="tag.php?t=<?php echo esc($tags[3][1]) ?>" class="text-primary"><?php echo esc($tags[3][0]) ?></a></strong>
               <div><small><a id="<?php echo esc($tags[3][1]) ?>link" href="<?php echo esc($tags[3][1]) ?>" target="_blank"><span id="<?php echo esc($tags[3][1]) ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo esc($tags[3][1]) ?>updatetime"></span></small></div>
               <h4 class="mb-0"><a href="#" id="<?php echo esc($tags[3][1]) ?>title" class="text-dark"></a></h4>
-              <p class="mb-auto" id="<?php echo esc($tags[3][1]) ?>content"></p>
+              <div class="card-text mb-auto" id="<?php echo esc($tags[3][1]) ?>content"></div>
             </div>
            </div>
           </div>
@@ -98,7 +102,7 @@ include(__DIR__ . "/includes/constants.php");
               <strong class="d-inline-block mb-2 text-body"><a href="tag.php?t=<?php echo esc($tags[4][1]) ?>" class="text-body"><?php echo esc($tags[4][0]) ?></a></strong>
               <div><small><a id="<?php echo esc($tags[4][1]) ?>link" href="<?php echo esc($tags[4][1]) ?>" target="_blank"><span id="<?php echo esc($tags[4][1]) ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo esc($tags[4][1]) ?>updatetime"></span></small></div>
               <h4 class="mb-0"><a href="#" id="<?php echo esc($tags[4][1]) ?>title" class="text-dark"></a></h4>
-              <p class="card-text mb-auto" id="<?php echo esc($tags[4][1]) ?>content"></p>
+              <div class="card-text mb-auto" id="<?php echo esc($tags[4][1]) ?>content"></div>
             </div>
            </div>
           </div>
@@ -110,7 +114,7 @@ include(__DIR__ . "/includes/constants.php");
               <strong class="d-inline-block mb-2 text-danger"><a href="tag.php?t=<?php echo esc($tags[5][1]) ?>" class="text-danger"><?php echo esc($tags[5][0]) ?></a></strong>
               <div><small><a id="<?php echo esc($tags[5][1]) ?>link" href="<?php echo esc($tags[5][1]) ?>" target="_blank"><span id="<?php echo esc($tags[5][1]) ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo esc($tags[5][1]) ?>updatetime"></span></small></div>
               <h4 class="mb-0"><a href="#" id="<?php echo esc($tags[5][1]) ?>title" class="text-dark"></a></h4>
-              <p class="mb-auto" id="<?php echo esc($tags[5][1]) ?>content"></p>
+              <div class="card-text mb-auto" id="<?php echo esc($tags[5][1]) ?>content"></div>
             </div>
            </div>
           </div>
@@ -122,7 +126,7 @@ include(__DIR__ . "/includes/constants.php");
               <strong class="d-inline-block mb-2 text-success"><a href="tag.php?t=<?php echo esc($tags[6][1]) ?>" class="text-success"><?php echo esc($tags[6][0]) ?></a></strong>
               <div><small><a id="<?php echo esc($tags[6][1]) ?>link" href="<?php echo esc($tags[6][1]) ?>" target="_blank"><span id="<?php echo esc($tags[6][1]) ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo esc($tags[6][1]) ?>updatetime"></span></small></div>
               <h4 class="mb-0"><a href="#" id="<?php echo esc($tags[6][1]) ?>title" class="text-dark"></a></h4>
-              <p class="mb-auto" id="<?php echo esc($tags[6][1]) ?>content"></p>
+              <div class="card-text mb-auto" id="<?php echo esc($tags[6][1]) ?>content"></div>
             </div>
            </div>
           </div>
@@ -134,7 +138,7 @@ include(__DIR__ . "/includes/constants.php");
               <strong class="d-inline-block mb-2 text-primary"><a href="tag.php?t=<?php echo esc($tags[7][1]) ?>" class="text-primary"><?php echo esc($tags[7][0]) ?></a></strong>
               <div><small><a id="<?php echo esc($tags[7][1]) ?>link" href="<?php echo esc($tags[7][1]) ?>" target="_blank"><span id="<?php echo esc($tags[7][1]) ?>source"></span></a> - <span class="mb-1 text-muted" id="<?php echo esc($tags[7][1]) ?>updatetime"></span></small></div>
               <h4 class="mb-0"><a href="#" id="<?php echo esc($tags[7][1]) ?>title" class="text-dark"></a></h4>
-              <p class="mb-auto" id="<?php echo esc($tags[7][1]) ?>content"></p>
+              <div class="card-text mb-auto" id="<?php echo esc($tags[7][1]) ?>content"></div>
             </div>
            </div>
           </div>

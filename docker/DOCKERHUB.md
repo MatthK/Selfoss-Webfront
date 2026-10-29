@@ -79,7 +79,7 @@ If you point this image at a database from an older selfoss/webfront installatio
 
 ## Tags
 
-- `2.0.1`, `2.0` — current release
+- `2.0.2`, `2.0` — current release
 - `latest` — tracks the most recent release
 
 ## Source, issues, license

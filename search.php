@@ -1,5 +1,9 @@
 <?php
 include(__DIR__ . "/includes/constants.php");
+// A user-supplied constants.php is bind-mounted over includes/constants.php
+// in the Docker setup and may be an older file that does not include
+// helpers.php - load the helper functions (esc, jsv, safe_url) regardless.
+include_once(__DIR__ . "/includes/helpers.php");
 
 if (isset($_POST['s']))
 {
@@ -95,7 +99,7 @@ $mysqli -> close();
               <div><small><a href="<?php echo safe_url($rSet[$i]["link"]); ?>" target="_blank" rel="noopener"><span><?php echo esc($rSet[$i]["Source"]); ?></span></a> - <span class="mb-1 text-muted"><?php echo esc($rSet[$i]["UpdateTime"]); ?> - <?php echo esc($rSet[$i]["author"]) ?></span></small></div>
               <h2 class="mb-0"><a href="article.php?i=<?php echo (int) $rSet[$i]["id"]; ?>" class="text-dark"><?php echo esc($rSet[$i]["Title"]); ?></a></h2>
               <p>&nbsp;</p>
-              <p class="card-text mb-auto"><?php echo $rSet[$i]["Content"]; ?></p>
+              <div class="card-text mb-auto"><?php echo $rSet[$i]["Content"]; ?></div>
             </div>
            </div>
           </div>

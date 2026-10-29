@@ -1,5 +1,9 @@
 <?php
 include(__DIR__ . "/includes/constants.php");
+// A user-supplied constants.php is bind-mounted over includes/constants.php
+// in the Docker setup and may be an older file that does not include
+// helpers.php - load the helper functions (esc, jsv, safe_url) regardless.
+include_once(__DIR__ . "/includes/helpers.php");
 
 if (isset($_GET['i']))
 {
@@ -106,7 +110,7 @@ function searchKey($id, $array) {
               <div class="d-flex mb-1 text-muted"><div class="w-100"><small><?php echo esc($article["source"]) ?> - <?php echo esc($article["updatetime"]) ?> - <?php echo esc($article["author"]) ?></small></div><div class="flex-shrink-1"><button type="button" class="justify-content-end btn <?php echo $class; ?> btn-sm" id="artstar" aid="<?php echo (int) $id; ?>">*</button></div></div>
               <h2 class="mb-0"><a href="<?php echo safe_url($article["link"]); ?>" class="text-dark" target="_blank" rel="noopener"><?php echo esc($article["title"]) ?></a></h2>
               <p>&nbsp;</p>
-              <p class="card-text mb-auto"><?php echo $article["content"]; ?></p>
+              <div class="card-text mb-auto"><?php echo $article["content"]; ?></div>
             </div>
            </div>
           </div>

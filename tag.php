@@ -1,5 +1,9 @@
 <?php
 include(__DIR__ . "/includes/constants.php");
+// A user-supplied constants.php is bind-mounted over includes/constants.php
+// in the Docker setup and may be an older file that does not include
+// helpers.php - load the helper functions (esc, jsv, safe_url) regardless.
+include_once(__DIR__ . "/includes/helpers.php");
 
 if (isset($_GET['t']))
 {
