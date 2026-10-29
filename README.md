@@ -110,7 +110,10 @@ If you are currently running the old [swfd](https://github.com/MatthK/swfd) Dock
 3. Start the new stack (see above) with your new password, then restore the dump:
    `docker exec -i selfoss-webfront-db-1 mysql -u root -p selfoss < selfoss-backup.sql`
 4. Copy your feed configuration from the old `swfd/Selfoss/config.ini` to
-   `config/selfoss.ini` (omit `db_*` values, they come from `.env` now) and your categories
+   `config/selfoss.ini`. Point the `db_*` values at your database (keep
+   `db_type=mysql` — without it selfoss falls back to SQLite and fails), or
+   leave them out and supply the equivalent `SELFOSS_DB_*` environment
+   variables instead (they override the ini values). Also copy your categories
    from the old `swfd/Webfront/constants.php` to `config/constants.php`.
 5. The old repositories are superseded by this one and can be archived.
 

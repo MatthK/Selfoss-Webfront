@@ -11,7 +11,7 @@ ARG SELFOSS_VERSION=2.19
 LABEL org.opencontainers.image.title="selfoss-webfront" \
       org.opencontainers.image.description="Selfoss RSS reader bundled with the newspaper-style Selfoss-Webfront" \
       org.opencontainers.image.authors="Matthias Karl" \
-      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.licenses="GPL-3.0" \
       org.opencontainers.image.source="https://github.com/MatthK/Selfoss-Webfront"
 
 ENV SELFOSS_VERSION=${SELFOSS_VERSION} \
