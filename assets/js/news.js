@@ -14,6 +14,10 @@
           return '#';
        }
 
+       // Set to true once the infinite scroll reached the end of the
+       // available articles (set by tPage, read by loadMoreContent).
+       var noMore = false;
+
        function getNews(tag, mlen, nrec, cat, page, cnt) {
            rNews('api/getNews.php?' + cat + 't='+encodeURIComponent(tag)+'&r='+nrec, cat, tag, mlen, page, cnt);
        }
@@ -80,6 +84,7 @@
                 tPage(oReply, tag, vcnt);
               },
               error: function(jqXHR, textStatus) {
+                mar = 1; // allow the next scroll to retry
                 showToast('alert-danger','Request failed: ' + textStatus,imto)
               }
           });
@@ -140,6 +145,15 @@
           $('#lastrf').html(getDateTime());  // update the top left last refreshed date/time
           $('#lastrfm').html(getDateTime());  // update the top left last refreshed date/time for mobiles
           mar = 1;
+          if (vgC <= 1) {
+             // Only the overlap item (or nothing) came back: no more articles
+             noMore = true;
+          }
+          // Keep filling the page while the viewport is not full yet
+          // (the pages define loadMoreContent for their infinite scroll)
+          if (typeof loadMoreContent === 'function') {
+             loadMoreContent();
+          }
        }
 
        function uPage(oReply, cat, tag, cnt, page) {

@@ -49,7 +49,6 @@ switch ($cat) {
       $query->bind_param("si", $tag, $nrec);
     break;
   case "x":
-      $tag = urldecode($tag);
       if (substr($tag, 0, 1) == '"') {
          $src = str_replace('"', '', $tag);
          $src = "%" . $src . "%";

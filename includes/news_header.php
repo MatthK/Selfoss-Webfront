@@ -10,9 +10,13 @@
               <small><span>Last refreshed on </span><span id="lastrfm"><?php echo date("d.m.Y H:i:s") ?></span></small>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0" id="srx" method="post" action="search.php">
-            <input class="form-control-sm mr-sm-2" id="search" name="s" type="search" placeholder="search" tabindex="10" value="" />&nbsp;
-            <button type="submit" class="btn btn-dark btn-sm my-2 my-sm-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg></button>
+          <form class="my-2 my-lg-0" id="srx" method="post" action="search.php">
+            <div class="input-group input-group-sm">
+              <input class="form-control" id="search" name="s" type="search" placeholder="search" tabindex="10" value="" aria-label="Search">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-dark" aria-label="Search"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg></button>
+              </div>
+            </div>
           </form>
         </div>
       </nav>
@@ -22,13 +26,17 @@
           <div class="col-3 pt-1">
             <small><span class="d-none d-sm-block">Last refreshed on </span><span id="lastrf"><?php echo date("d.m.Y H:i:s") ?></span></small>
           </div>
-          <div class="col-6 text-center">
+          <div class="col-6 col-lg-5 text-center">
             <a class="<?php echo $font; ?> text-dark" href="index.php"><?php echo esc($npName) ?></a>
           </div>
-          <div class="col-3 d-flex justify-content-end align-items-center">
-            <form class="form-inline" id="srx" method="post" action="search.php">
-              <input class="form-control-sm" id="search" name="s" type="text"  tabindex="10" value="" />&nbsp;
-              <button type="submit" class="btn btn-dark btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg></button>
+          <div class="col-3 col-lg-4 d-flex justify-content-end align-items-center">
+            <form id="srx" method="post" action="search.php">
+              <div class="input-group input-group-sm">
+                <input class="form-control" id="search" name="s" type="search" placeholder="search" tabindex="10" value="" aria-label="Search">
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-dark" aria-label="Search"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg></button>
+                </div>
+              </div>
             </form>
           </div>
         </div>

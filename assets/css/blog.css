@@ -113,3 +113,25 @@ h1, h2, h3, h4, h5, h6 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+/*
+ * Embedded article media
+ * Scale images wider than the column down to the column width instead of
+ * cutting them off at the right (overflow-hidden still clips very tall
+ * images in the fixed-height teaser cards).
+ */
+.card-text img,
+.lead img,
+.blog-post img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-text video,
+.lead video,
+.blog-post video,
+.card-text iframe,
+.lead iframe,
+.blog-post iframe {
+  max-width: 100%;
+}

@@ -137,19 +137,25 @@ $mysqli -> close();
        var mar = 1;
        var cntNews = 0;
 
+       // Endless scroll: load the next batch of search results as soon as
+       // the bottom of the page comes into view - on scroll and right away
+       // on a short initial page - until no more results are available
+       function loadMoreContent() {
+          if (mar == 1 && !noMore && checkDBot('infscroll')) {
+             mar = 0;
+             cNo = cNo + 14;
+             getInfTag(cNo, 'srx' + srxTerm, cnt);
+             cnt = cnt + 1;
+          }
+       }
+
        $(document).ready(function(){
 
          getNews('', 1024, <?php echo (int) $artno; ?>, 'c='+cntNews+'&', 'srx', cntNews);
          setInterval(function() { getNews('', 1024, <?php echo (int) $artno; ?>, 'c='+cntNews+'&', 'srx', cntNews); }, <?php echo (int) $artrf; ?> * 1000);
 
          $(window).on("scroll", function() {
-           if (checkDBot('infscroll') && mar == 1) {
-              // get more content
-              mar = 0;
-              cNo = cNo + 14;
-              getInfTag(cNo, 'srx' + srxTerm, cnt);
-              cnt = cnt + 1;
-           }
+           loadMoreContent();
            if (checkDBot('news'+cntNews)) {
               $('#newsgmc').show('slow');
            }
@@ -170,7 +176,10 @@ $mysqli -> close();
             let hid = vid.substr(4,vid.length);
             hideArticle(hid);
          });
-         
+
+         // Fill the viewport right away when the initial page is short
+         loadMoreContent();
+
        });
     </script>
 <?php include(__DIR__ . "/includes/news_footer.php"); ?>

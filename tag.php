@@ -156,6 +156,18 @@ $hasArticles = count($rSet) > 0;
        var tagName = tagIdx >= 0 ? jTags[tagIdx].name : curTag;
        var cntNews = 0;
 
+       // Endless scroll: load the next batch of articles as soon as the
+       // bottom of the page comes into view - on scroll and right away on
+       // a short initial page - until no more articles are available
+       function loadMoreContent() {
+          if (mar == 1 && !noMore && checkDBot('infscroll')) {
+             mar = 0;
+             cNo = cNo + 14;
+             getInfTag(cNo, curTag, cnt);
+             cnt = cnt + 1;
+          }
+       }
+
        $(document).ready(function(){
 
          getNews('other' + curTag, 1024, <?php echo (int) $artno; ?>, 'c='+cntNews+'&', 'tag', cntNews);
@@ -164,13 +176,7 @@ $hasArticles = count($rSet) > 0;
          setMenu(curTag);
 
          $(window).on("scroll", function() {
-           if (checkDBot('infscroll') && mar == 1) {
-              // get more content
-              mar = 0;
-              cNo = cNo + 14;
-              getInfTag(cNo, curTag, cnt);
-              cnt = cnt + 1;
-           }
+           loadMoreContent();
            if (checkDBot('other' + curTag + 'news'+cntNews)) {
               $('#newsgmc').show('slow');
            }
@@ -196,7 +202,10 @@ $hasArticles = count($rSet) > 0;
                hideArticle(hid);
             }
          });
-         
+
+         // Fill the viewport right away when the initial page is short
+         loadMoreContent();
+
        });
     </script>
 <?php include(__DIR__ . "/includes/news_footer.php"); ?>
