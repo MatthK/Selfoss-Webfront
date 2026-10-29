@@ -1,0 +1,4 @@
+[mysqld]
+# The webfront creates a stored function (HTML_UnEncode) as a non-privileged
+# user, which MySQL only allows when binary logging is disabled.
+disable-log-bin

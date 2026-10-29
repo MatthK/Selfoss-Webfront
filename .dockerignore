@@ -1,0 +1,7 @@
+.git
+.github
+screenshots
+config
+docker-compose.yml
+.env
+*.md

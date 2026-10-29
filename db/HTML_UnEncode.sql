@@ -11,10 +11,10 @@
     THEN SET TextString = REPLACE(TextString, '&quot;','"') ; 
     END IF ; 
 
-    #apostrophe  
-    IF INSTR( X , '&apos;' ) 
-    THEN SET TextString = REPLACE(TextString, '&apos;','"') ; 
-    END IF ; 
+    #apostrophe
+    IF INSTR( X , '&apos;' )
+    THEN SET TextString = REPLACE(TextString, '&apos;','''') ;
+    END IF ;
 
     #ampersand 
     IF INSTR( X , '&amp;' ) 

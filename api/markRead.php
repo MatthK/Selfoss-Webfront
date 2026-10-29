@@ -1,9 +1,9 @@
 <?php
-include("../includes/constants.php");
+include(__DIR__ . "/../includes/constants.php");
 
 if (isset($_GET['i']))
 {
-   $id  = $_GET['i'];
+   $id = (int) $_GET['i'];
 } else {
    $id = 0;
 }
@@ -27,9 +27,9 @@ if ($star == "1") {
   $result = $starqry->affected_rows;
   $starqry->close();
   if($result > 0){
-      $response_array['status'] = 'success';  
+      $response_array['status'] = 'success';
   }else {
-      $response_array['status'] = 'error';  
+      $response_array['status'] = 'error';
   }
 } elseif ($star == "0") {
   $starqry = $mysqli->prepare("UPDATE items SET starred = 0 WHERE id = ?");
@@ -38,9 +38,9 @@ if ($star == "1") {
   $result = $starqry->affected_rows;
   $starqry->close();
   if($result > 0){
-      $response_array['status'] = 'success';  
+      $response_array['status'] = 'success';
   }else {
-      $response_array['status'] = 'error';  
+      $response_array['status'] = 'error';
   }
 } else {
   $getTitle = $mysqli->prepare("SELECT title FROM items WHERE id = ?");
@@ -50,13 +50,21 @@ if ($star == "1") {
   while($row = mysqli_fetch_assoc($result)){
      $title[] = $row;
   }
-  // Replace '
-  $stitle = str_replace("'", "''", $title[0]['title']);
-  $query = "UPDATE items SET unread = 0 WHERE title = '" . $stitle . "'";
-  if(mysqli_query($mysqli, $query)){
-      $response_array['status'] = 'success';  
-  }else {
-      $response_array['status'] = 'error';  
+  $getTitle->close();
+  if (isset($title[0]['title'])) {
+    // Mark all items with the same title as read (duplicates across feeds/sources)
+    $markRead = $mysqli->prepare("UPDATE items SET unread = 0 WHERE title = ?");
+    $markRead->bind_param("s", $title[0]['title']);
+    $markRead->execute();
+    $result = $markRead->affected_rows;
+    $markRead->close();
+    if($result > 0){
+        $response_array['status'] = 'success';
+    }else {
+        $response_array['status'] = 'error';
+    }
+  } else {
+    $response_array['status'] = 'error';
   }
 }
 echo json_encode($response_array);

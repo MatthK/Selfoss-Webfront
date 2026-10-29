@@ -1,19 +1,24 @@
 <?php
-// Add the details for your MySQL database
-$dbserver = "selfoss.domain.com";   // The IP address or domain name of the database server
-$database = "selfoss";              // The name of the database
-$username = "selfoss";              // The username for the database
-$dbpwd    = "secretPassword";       // The password for the database user
+include_once(__DIR__ . "/helpers.php");
 
-$npName = "Users's Morning Post";   // The name of your Newspaper
-$font   = "blog-header-logo";       // Use either "blog-header-logo" or "blog-header-logo-old" for a more old-fashioned font for the title
+// Database connection details. The values can be supplied through
+// environment variables (SWF_DB_HOST, SWF_DB_NAME, SWF_DB_USER,
+// SWF_DB_PASSWORD) as done by the bundled Docker setup. For a manual
+// installation, edit the fallback values below.
+$dbserver = getenv("SWF_DB_HOST") ?: "localhost";
+$database = getenv("SWF_DB_NAME") ?: "selfoss";
+$username = getenv("SWF_DB_USER") ?: "selfoss";
+$dbpwd    = getenv("SWF_DB_PASSWORD") ?: "secretPassword";
+
+$npName = "User's Morning Post";   // The name of your Newspaper
+$font   = "blog-header-logo";      // Use either "blog-header-logo" or "blog-header-logo-old" for a more old-fashioned font for the title
 
 $smar = 10;                         // The number of seconds to wait before an article is marked as read
 $imto = 10;                         // The timeout for error/info messages to disappear
 $artno = 15;                        // The number of articles to be shown left/right of an article
 $artrf = 600;                       // Number of seconds to refresh the articles left/right
 
-// The array holds various values. 
+// The array holds various values.
 //   1. The term to display on the page with capitalized letters and possible spaces
 //   2. The second used for the tags and should not contain spaces, should be all lower case and correspond to the tags used in Selfoss
 //   3. The interval in seconds to refresh the tag
@@ -34,9 +39,9 @@ $tags = array (
     array ("Movies & TV", "film", 600, 99999, 5),
     array ("Top", "top", 600, 1024, 5));
 
-$jTags = "[";
+// Representation of $tags passed to the JavaScript on the pages
+$jTags = array();
 foreach ($tags as $row) {
-   $jTags = $jTags . "{ 'tag' : '" . $row[1] . "', 'itv' : " . $row[2] . ", 'mlen' : " . $row[3] . ", 'nrec' : " . $row[4] . ", 'name' : '" . $row[0] . "' },\r\n";
+   $jTags[] = array("tag" => (string) $row[1], "itv" => (int) $row[2], "mlen" => (int) $row[3], "nrec" => (int) $row[4], "name" => (string) $row[0]);
 }
-$jTags = substr($jTags, 0, strlen($jTags)-3) . "];\r\n";
 ?>

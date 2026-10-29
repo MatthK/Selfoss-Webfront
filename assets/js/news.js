@@ -1,5 +1,21 @@
-﻿       function getNews(tag, mlen, nrec, cat, page, cnt) {
-           rNews('api/getNews.php?' + cat + 't='+tag+'&r='+nrec, cat, tag, mlen, page, cnt);
+﻿       // Escape a value for safe embedding into HTML text or attributes.
+       function escHtml(value) {
+          return String(value).replace(/[&<>"']/g, function (c) {
+             return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+          });
+       }
+
+       // Only allow http(s), relative and fragment URLs as link targets.
+       function safeUrl(url) {
+          url = String(url);
+          if (/^(https?:\/\/|\/|#)/i.test(url)) {
+             return escHtml(url);
+          }
+          return '#';
+       }
+
+       function getNews(tag, mlen, nrec, cat, page, cnt) {
+           rNews('api/getNews.php?' + cat + 't='+encodeURIComponent(tag)+'&r='+nrec, cat, tag, mlen, page, cnt);
        }
 
        function hideArticle(itemid, star) {
@@ -22,17 +38,17 @@
              var str = '';
           }
           $.ajax({
-              url: 'api/markRead.php?i=' + itemid + str,
+              url: 'api/markRead.php?i=' + encodeURIComponent(itemid) + str,
               type: 'GET',
               dataType: 'json',
               success: function ( data ) {
                 if (star == 2) {
-                   $('#btn'+itemid).hide('slow');
-                   $('#read'+itemid).hide('slow');
+                   $('#btn'+escHtml(itemid)).hide('slow');
+                   $('#read'+escHtml(itemid)).hide('slow');
                    showToast('alert-primary','The article has been marked as read', imto)
                 } else if (str == '') {
-                   $('#art'+itemid).removeClass('d-flex');
-                   $('#art'+itemid).addClass('d-none');
+                   $('#art'+escHtml(itemid)).removeClass('d-flex');
+                   $('#art'+escHtml(itemid)).addClass('d-none');
                    showToast('alert-primary','The article has been marked as read', imto);
                 } else {
                    $('#infobox').html(msg);
@@ -51,9 +67,9 @@
 
        function getInfTag(cNo, tag, vcnt) {
           if (tag.substr(0,3) == 'srx') {
-             vUrl = 'api/getNews.php?c=x&' + 't='+encodeURI(tag.substr(3))+'&r='+cNo;
+             vUrl = 'api/getNews.php?c=x&' + 't='+encodeURIComponent(tag.substr(3))+'&r='+cNo;
           } else {
-             vUrl = 'api/getNews.php?c=t&' + 't='+tag+'&r='+cNo;
+             vUrl = 'api/getNews.php?c=t&' + 't='+encodeURIComponent(tag)+'&r='+cNo;
           }
           $.ajax({
               url: vUrl,
@@ -68,7 +84,7 @@
               }
           });
        }
- 
+
        function rNews(rURL, cat, tag, mlen, page, cnt) {
           $.ajax({
               url: rURL,
@@ -86,34 +102,37 @@
               }
           });
        }
- 
+
        function uNews(oReply, tag, mlen) {
-          $('#' + tag + 'title').html(oReply[0].Title);
-          $('#' + tag + 'updatetime').html(oReply[0].UpdateTime);
-          $('#' + tag + 'source').html(oReply[0].Source);
+          if (!oReply || oReply.length == 0) {
+             return;
+          }
+          $('#' + tag + 'title').html(escHtml(oReply[0].Title));
+          $('#' + tag + 'updatetime').html(escHtml(oReply[0].UpdateTime));
+          $('#' + tag + 'source').html(escHtml(oReply[0].Source));
           if (oReply[0].Content.length > mlen) {
              vcr = '...';
           } else {
              vcr = '';
           }
           $('#' + tag + 'content').html(oReply[0].Content.substring(0, mlen) + vcr);
-          $('#' + tag + 'link').attr('href', oReply[0].link);
-          $('#' + tag + 'title').attr('href', 'article.php?i='+oReply[0].id);
-          $('#' + tag + 'id').attr('href', 'article.php?i='+oReply[0].id);
+          $('#' + tag + 'link').attr('href', safeUrl(oReply[0].link));
+          $('#' + tag + 'title').attr('href', 'article.php?i='+encodeURIComponent(oReply[0].id));
+          $('#' + tag + 'id').attr('href', 'article.php?i='+encodeURIComponent(oReply[0].id));
           $('#lastrf').html(getDateTime());  // update the top left last refreshed date/time
           $('#lastrfm').html(getDateTime());  // update the top left last refreshed date/time for mobiles
        }
- 
+
        // Infinite scroll on tag + search page to add more content
        function tPage(oReply, tag, vcnt) {
           var vgC = oReply.length;
           var vHtml = '';
           for (g = 1; g < vgC; g++) {
               vHtml += '<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative"><div class="row no-gutters overflow-hidden flex-md-row mb-4 h-md-250 position-relative"><div class="col p-2 d-flex flex-column position-static">';
-              vHtml += '<div><small><a href="' + oReply[g].link + '" target="_blank"><span>' + oReply[g].Source + '</span></a> - <span class="mb-1 text-muted">' + oReply[g].updatetime + ' - ' + oReply[g].author + '</span></small></div>';
-              vHtml += '<h2 class="mb-0"><a href="article.php?i=' + oReply[g].id + '" class="text-dark">' + oReply[g].title + '</a></h2><p>&nbsp;</p>';
+              vHtml += '<div><small><a href="' + safeUrl(oReply[g].link) + '" target="_blank" rel="noopener"><span>' + escHtml(oReply[g].Source) + '</span></a> - <span class="mb-1 text-muted">' + escHtml(oReply[g].updatetime) + ' - ' + escHtml(oReply[g].author) + '</span></small></div>';
+              vHtml += '<h2 class="mb-0"><a href="article.php?i=' + encodeURIComponent(oReply[g].id) + '" class="text-dark">' + escHtml(oReply[g].title) + '</a></h2><p>&nbsp;</p>';
               vHtml += '<div class="card-text mb-auto">' + oReply[g].content + '</div>';
-              vHtml += '<div class="d-flex flex-row-reverse d-md-none" id="btn' + oReply[g].id + '"><button type="button" class="btn-light btn-sm" id="read' + oReply[g].id + '">Mark as read</button></div></div></div></div>';
+              vHtml += '<div class="d-flex flex-row-reverse d-md-none" id="btn' + escHtml(oReply[g].id) + '"><button type="button" class="btn-light btn-sm" id="read' + escHtml(oReply[g].id) + '">Mark as read</button></div></div></div></div>';
           }
           let xcnt = +vcnt + 1;
           vHtml += '</div><div id="tcontent' + xcnt + '">';
@@ -132,20 +151,22 @@
              var gStart = 0;
           }
           for (g = gStart; g < vgC; g++) {
-             vHtml += '<div class="d-flex mb-3" id="art' + oReply[g].id + '"><div class="w-100"><p>';
+             vHtml += '<div class="d-flex mb-3" id="art' + escHtml(oReply[g].id) + '"><div class="w-100"><p>';
              if (tag.substring(0, 5) == 'other') {
-                vHtml += '<span><a href="tag.php?t=' + oReply[g].Tags.toLowerCase() + '" class="text-dark">' + jTags[jTags.findIndex(x => x.tag === oReply[g].Tags.toLowerCase())].name + '</a></span> - ';
+                var otherTag = String(oReply[g].Tags).toLowerCase();
+                var otherIdx = jTags.findIndex(x => x.tag === otherTag);
+                vHtml += '<span><a href="tag.php?t=' + encodeURIComponent(otherTag) + '" class="text-dark">' + escHtml(otherIdx >= 0 ? jTags[otherIdx].name : otherTag) + '</a></span> - ';
              }
-             vHtml += '<small><a href="' + oReply[g].link + '" class="text-black-50" target="_blank">' + oReply[g].Source + '</a>&nbsp;-&nbsp;' + oReply[g].UpdateTime + '</small><br/><a href="article.php?i=' + oReply[g].id + '" class="text-dark">' + oReply[g].Title + '</a></p></div><div class="flex-shrink-1"><button type="button" class="justify-content-end btn btn-light btn-sm" id="hide' + oReply[g].id + '">x</button></div></div>';
+             vHtml += '<small><a href="' + safeUrl(oReply[g].link) + '" class="text-black-50" target="_blank" rel="noopener">' + escHtml(oReply[g].Source) + '</a>&nbsp;-&nbsp;' + escHtml(oReply[g].UpdateTime) + '</small><br/><a href="article.php?i=' + encodeURIComponent(oReply[g].id) + '" class="text-dark">' + escHtml(oReply[g].Title) + '</a></p></div><div class="flex-shrink-1"><button type="button" class="justify-content-end btn btn-light btn-sm" id="hide' + escHtml(oReply[g].id) + '">x</button></div></div>';
           }
           if (cat == 'c='+cnt+'&') {
               vHtmlm = vHtml + '</div><div id="' + tag + 'newsm' + (+cnt+1) +'">';
               vHtml += '</div><div id="' + tag + 'news' + (+cnt+1) +'">';
-              $('#' + tag + 'news' + cnt).html(vHtml); 
-              $('#' + tag + 'newsm' + cnt).html(vHtmlm); 
+              $('#' + tag + 'news' + cnt).html(vHtml);
+              $('#' + tag + 'newsm' + cnt).html(vHtmlm);
           } else {
               vHtml += '</div><div id="newssrc' + (+cnt+1) +'">';
-              $('#newssrc' + cnt).html(vHtml); 
+              $('#newssrc' + cnt).html(vHtml);
           }
           $('#lastrf').html(getDateTime());  // update the top left last refreshed date/time
           $('#lastrfm').html(getDateTime());  // update the top left last refreshed date/time for mobiles
@@ -159,35 +180,35 @@
           $('#toast-body').addClass(type);
           $('#toast-body').html(msg);
           $('.toast').toast('show');
-       }       
+       }
 
        function setMenu(tag) {
           $('#menu'+tag).removeClass('text-muted');
           $('#menu'+tag).addClass('btn btn-secondary');
        }
-       
+
        function checkDBot(id) {
          if (($(window).height() + $(window).scrollTop()) >= (document.getElementById(id).offsetHeight + document.getElementById(id).offsetTop)) {
             return true;
          } else {
             return false;
-         }       
+         }
        }
 
        function getDateTime() {
-               var now     = new Date(); 
+               var now     = new Date();
                var year    = now.getFullYear();
-               var month   = now.getMonth()+1; 
+               var month   = now.getMonth()+1;
                var day     = now.getDate();
                var hour    = now.getHours();
                var minute  = now.getMinutes();
-               var second  = now.getSeconds(); 
+               var second  = now.getSeconds();
                if(month.toString().length == 1) {
                     month = '0'+month;
                }
                if(day.toString().length == 1) {
                     day = '0'+day;
-               }   
+               }
                if(hour.toString().length == 1) {
                     hour = '0'+hour;
                }
@@ -196,7 +217,7 @@
                }
                if(second.toString().length == 1) {
                     second = '0'+second;
-               }   
-               var dateTime = day+'.'+month+'.'+year+' '+hour+':'+minute+':'+second;   
+               }
+               var dateTime = day+'.'+month+'.'+year+' '+hour+':'+minute+':'+second;
                return dateTime;
            }

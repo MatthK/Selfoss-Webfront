@@ -1,6 +1,6 @@
       <!-- Only show on mobile -->
       <nav class="navbar navbar-expand-lg navbar-light bg-light d-md-none">
-        <a class="navbar-brand" href="index.php"><?php echo $npName ?></a>
+        <a class="navbar-brand" href="index.php"><?php echo esc($npName) ?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#srxfrm" aria-controls="srxfrm" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,7 +23,7 @@
             <small><span class="d-none d-sm-block">Last refreshed on </span><span id="lastrf"><?php echo date("d.m.Y H:i:s") ?></span></small>
           </div>
           <div class="col-6 text-center">
-            <a class="<?php echo $font; ?> text-dark" href="index.php"><?php echo $npName ?></a>
+            <a class="<?php echo $font; ?> text-dark" href="index.php"><?php echo esc($npName) ?></a>
           </div>
           <div class="col-3 d-flex justify-content-end align-items-center">
             <form class="form-inline" id="srx" method="post" action="search.php">
@@ -36,16 +36,16 @@
       <!-- Show all -->
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-          <a id="menu<?php echo $tags[0][1] ?>" class="p-2 text-muted" href="tag.php?t=<?php echo $tags[0][1] ?>"><?php echo $tags[0][0] ?></a>
-          <a id="menu<?php echo $tags[1][1] ?>" class="p-2 text-muted" href="tag.php?t=<?php echo $tags[1][1] ?>"><?php echo $tags[1][0] ?></a>
-          <a id="menu<?php echo $tags[2][1] ?>" class="p-2 text-muted" href="tag.php?t=<?php echo $tags[2][1] ?>"><?php echo $tags[2][0] ?></a>
-          <a id="menu<?php echo $tags[3][1] ?>" class="p-2 text-muted" href="tag.php?t=<?php echo $tags[3][1] ?>"><?php echo $tags[3][0] ?></a>
-          <a id="menu<?php echo $tags[4][1] ?>" class="p-2 text-muted" href="tag.php?t=<?php echo $tags[4][1] ?>"><?php echo $tags[4][0] ?></a>
-          <a id="menu<?php echo $tags[5][1] ?>" class="p-2 text-muted" href="tag.php?t=<?php echo $tags[5][1] ?>"><?php echo $tags[5][0] ?></a>
-          <a id="menu<?php echo $tags[6][1] ?>" class="p-2 text-muted" href="tag.php?t=<?php echo $tags[6][1] ?>"><?php echo $tags[6][0] ?></a>
-          <a id="menu<?php echo $tags[7][1] ?>" class="p-2 text-muted" href="tag.php?t=<?php echo $tags[7][1] ?>"><?php echo $tags[7][0] ?></a>
-          <a id="menu<?php echo $tags[8][1] ?>" class="p-2 text-muted" href="tag.php?t=<?php echo $tags[8][1] ?>"><?php echo $tags[8][0] ?></a>
-          <a id="menu<?php echo $tags[9][1] ?>" class="p-2 text-muted" href="tag.php?t=<?php echo $tags[9][1] ?>"><?php echo $tags[9][0] ?></a>
-          <a id="menu<?php echo $tags[10][1] ?>" class="p-2 text-muted" href="tag.php?t=<?php echo $tags[10][1] ?>"><?php echo $tags[10][0] ?></a>
+          <a id="menu<?php echo esc($tags[0][1]) ?>" class="p-2 text-muted" href="tag.php?t=<?php echo esc($tags[0][1]) ?>"><?php echo esc($tags[0][0]) ?></a>
+          <a id="menu<?php echo esc($tags[1][1]) ?>" class="p-2 text-muted" href="tag.php?t=<?php echo esc($tags[1][1]) ?>"><?php echo esc($tags[1][0]) ?></a>
+          <a id="menu<?php echo esc($tags[2][1]) ?>" class="p-2 text-muted" href="tag.php?t=<?php echo esc($tags[2][1]) ?>"><?php echo esc($tags[2][0]) ?></a>
+          <a id="menu<?php echo esc($tags[3][1]) ?>" class="p-2 text-muted" href="tag.php?t=<?php echo esc($tags[3][1]) ?>"><?php echo esc($tags[3][0]) ?></a>
+          <a id="menu<?php echo esc($tags[4][1]) ?>" class="p-2 text-muted" href="tag.php?t=<?php echo esc($tags[4][1]) ?>"><?php echo esc($tags[4][0]) ?></a>
+          <a id="menu<?php echo esc($tags[5][1]) ?>" class="p-2 text-muted" href="tag.php?t=<?php echo esc($tags[5][1]) ?>"><?php echo esc($tags[5][0]) ?></a>
+          <a id="menu<?php echo esc($tags[6][1]) ?>" class="p-2 text-muted" href="tag.php?t=<?php echo esc($tags[6][1]) ?>"><?php echo esc($tags[6][0]) ?></a>
+          <a id="menu<?php echo esc($tags[7][1]) ?>" class="p-2 text-muted" href="tag.php?t=<?php echo esc($tags[7][1]) ?>"><?php echo esc($tags[7][0]) ?></a>
+          <a id="menu<?php echo esc($tags[8][1]) ?>" class="p-2 text-muted" href="tag.php?t=<?php echo esc($tags[8][1]) ?>"><?php echo esc($tags[8][0]) ?></a>
+          <a id="menu<?php echo esc($tags[9][1]) ?>" class="p-2 text-muted" href="tag.php?t=<?php echo esc($tags[9][1]) ?>"><?php echo esc($tags[9][0]) ?></a>
+          <a id="menu<?php echo esc($tags[10][1]) ?>" class="p-2 text-muted" href="tag.php?t=<?php echo esc($tags[10][1]) ?>"><?php echo esc($tags[10][0]) ?></a>
         </nav>
       </div>

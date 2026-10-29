@@ -1,0 +1,5 @@
+# Local secrets for the Docker Compose setup
+.env
+
+# Runtime data
+config/mysql-data/
