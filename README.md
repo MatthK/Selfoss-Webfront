@@ -101,9 +101,10 @@ A list of feed suggestions is kept in the [swfd README](https://github.com/Matth
 
 If you are currently running the old [swfd](https://github.com/MatthK/swfd) Docker Compose setup:
 
-1. **Rotate your database password first.** The old swfd repository published the MySQL
-   password in plain text on GitHub (`docker-compose.yml`, `swfd/Selfoss/config.ini` and
-   `swfd/Webfront/constants.php`). Treat it as compromised and choose a new one.
+1. **Choose a fresh database password.** The old swfd repository shipped a sample
+   password in plain text in its published files (`docker-compose.yml`,
+   `swfd/Selfoss/config.ini` and `swfd/Webfront/constants.php`). If you ran the old
+   stack with that default anywhere, rotate it — it is publicly known.
 2. Stop the old stack and dump the database:
    `docker exec MySql mysqldump -u root -p selfoss > selfoss-backup.sql`
 3. Start the new stack (see above) with your new password, then restore the dump:
@@ -150,8 +151,8 @@ the RSS feed itself.
 ## Security notes
 
 - **No secrets in this repository.** All credentials for the Docker stack are supplied
-  through `.env` (git-ignored) and environment variables. Please rotate any credentials you
-  may have published in the old swfd repository.
+  through `.env` (git-ignored) and environment variables. If you ever ran a stack with the
+  sample credentials published in the old swfd repository, replace them.
 - The webfront API endpoints (`api/`) have no authentication and can mark articles as
   read/unread. This mirrors the original design of a personal, single-user newspaper. Keep
   the stack on a trusted network or behind an authenticated reverse proxy.
