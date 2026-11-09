@@ -1,3 +1,6 @@
+# Moved to new home!
+This repository has moved to [my own Forgejo instance](https://git.nhz.ch/forgejo/Selfoss-Webfront). Check for any updates on that site.
+
 # selfoss - Webfront
 
 This is a newspaper style webfront for the [selfoss RSS reader](https://github.com/fossar/selfoss),
